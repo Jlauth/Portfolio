@@ -11,22 +11,33 @@ import type { Project } from "@/types";
 const defaultProjects: Project[] = [
   {
     id: "1",
-    title: "Boutique E-commerce PrestaShop 8.2",
+    title: "STL CHR - E-commerce PrestaShop 8.2",
     description:
-      "Boutique en ligne complète pour la vente de matériel de cuisine. Développement sur PrestaShop 8.2 avec personnalisation de modules, overrides Smarty et optimisation des performances.",
+      "Boutique e-commerce complète pour matériel de cuisine professionnel. Développement PrestaShop 8.2 avec personnalisation de modules, rédaction de fiches produit SEO friendly, optimisation des performances (OPcache, cache, etc.) et amélioration de l'expérience utilisateur.",
     image_url: null,
-    technologies: ["PrestaShop 8.2", "PHP", "Smarty", "MySQL", "CSS/JS"],
+    technologies: ["PrestaShop 8.2", "PHP", "Smarty", "MySQL", "SEO", "OPcache", "Performance"],
     github_url: null,
     demo_url: null,
     created_at: new Date().toISOString(),
   },
   {
     id: "2",
-    title: "Site WordPress Garage Automobile",
+    title: "Garage Ottélec - WordPress Elementor Pro",
     description:
-      "Site vitrine professionnel pour un garage automobile développé avec WordPress et Elementor Pro. Design responsive, optimisation SEO et intégration de formulaires de contact.",
+      "Site vitrine professionnel pour garage automobile développé avec WordPress et Elementor Pro. Design moderne et responsive, optimisation SEO, intégration de formulaires de contact et gestion de contenu optimisée.",
     image_url: null,
-    technologies: ["WordPress", "Elementor Pro", "PHP", "CSS", "SEO"],
+    technologies: ["WordPress", "Elementor Pro", "PHP", "CSS", "SEO", "Responsive"],
+    github_url: null,
+    demo_url: null,
+    created_at: new Date().toISOString(),
+  },
+  {
+    id: "3",
+    title: "Omniflamme - Mise à jour E-commerce",
+    description:
+      "Mise à jour et amélioration d'une boutique e-commerce existante avec développement de nombreux modules custom. Inclut un module innovant développé en Three.js pour une expérience 3D interactive et immersive.",
+    image_url: null,
+    technologies: ["PrestaShop", "PHP", "Three.js", "JavaScript", "Modules Custom", "3D"],
     github_url: null,
     demo_url: null,
     created_at: new Date().toISOString(),
@@ -79,7 +90,7 @@ export function Projects() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
             <motion.div
               key={project.id}
