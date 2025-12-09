@@ -104,6 +104,100 @@ const skillCategories: SkillCategory[] = [
       { name: "Autonomie sans IA", level: 30, color: "from-indigo-400 to-indigo-600" },
     ],
   },
+  {
+    title: "SEO Technique",
+    emoji: "🟦",
+    skills: [
+      { name: "Balises meta / OG / structure", level: 90, color: "from-blue-500 to-blue-700" },
+      { name: "Robots.txt / Sitemap / 301", level: 85, color: "from-blue-500 to-blue-700" },
+      { name: "Performance SEO", level: 85, color: "from-blue-500 to-blue-700" },
+      { name: "Search Console (erreurs & optimisation)", level: 80, color: "from-blue-500 to-blue-700" },
+      { name: "Données structurées (schema.org)", level: 75, color: "from-blue-500 to-blue-700" },
+      { name: "Canonical / duplicate / hreflang", level: 70, color: "from-blue-500 to-blue-700" },
+    ],
+  },
+  {
+    title: "SEO On-Page / Contenu",
+    emoji: "🟧",
+    skills: [
+      { name: "Recherche de mots-clés", level: 85, color: "from-orange-500 to-orange-700" },
+      { name: "Optimisation on-page (Hn, maillage)", level: 90, color: "from-orange-500 to-orange-700" },
+      { name: "Rédaction SEO optimisée", level: 95, color: "from-orange-500 to-orange-700" },
+      { name: "Analyse SERP", level: 85, color: "from-orange-500 to-orange-700" },
+      { name: "Optimisation images", level: 90, color: "from-orange-500 to-orange-700" },
+      { name: "Stratégie de maillage interne", level: 85, color: "from-orange-500 to-orange-700" },
+    ],
+  },
+  {
+    title: "Rédaction SEO / Copywriting",
+    emoji: "🟨",
+    skills: [
+      { name: "Style & fluidité", level: 95, color: "from-yellow-500 to-yellow-700" },
+      { name: "Intégration naturelle des mots-clés", level: 90, color: "from-yellow-500 to-yellow-700" },
+      { name: "Construction Hn", level: 95, color: "from-yellow-500 to-yellow-700" },
+      { name: "Accroche / taux de clic", level: 85, color: "from-yellow-500 to-yellow-700" },
+      { name: "CTA / conversion", level: 80, color: "from-yellow-500 to-yellow-700" },
+      { name: "Adaptation du ton", level: 90, color: "from-yellow-500 to-yellow-700" },
+      { name: "Contenus longs optimisés", level: 90, color: "from-yellow-500 to-yellow-700" },
+    ],
+  },
+  {
+    title: "Stratégie éditoriale",
+    emoji: "🟪",
+    skills: [
+      { name: "Personas & intentions", level: 85, color: "from-purple-500 to-purple-700" },
+      { name: "Calendrier éditorial", level: 80, color: "from-purple-500 to-purple-700" },
+      { name: "Opportunités SEO / contenu", level: 85, color: "from-purple-500 to-purple-700" },
+      { name: "Priorisation par volume & intention", level: 80, color: "from-purple-500 to-purple-700" },
+      { name: "Analyse concurrentielle", level: 75, color: "from-purple-500 to-purple-700" },
+      { name: "Architecture sémantique (silos/clusters)", level: 70, color: "from-purple-500 to-purple-700" },
+    ],
+  },
+  {
+    title: "Analytics & Tracking",
+    emoji: "🟩",
+    skills: [
+      { name: "GA4 (lecture & KPIs)", level: 80, color: "from-green-500 to-green-700" },
+      { name: "Événements simples (clic, scroll…)", level: 70, color: "from-green-500 to-green-700" },
+      { name: "Search Console (analyse trafic orga)", level: 85, color: "from-green-500 to-green-700" },
+      { name: "Reporting & insights", level: 80, color: "from-green-500 to-green-700" },
+      { name: "Tracking e-commerce (bases)", level: 50, color: "from-green-500 to-green-700" },
+    ],
+  },
+  {
+    title: "Social Media & Ads",
+    emoji: "🟫",
+    skills: [
+      { name: "Planification social media", level: 70, color: "from-amber-600 to-amber-800" },
+      { name: "Rédaction posts", level: 40, color: "from-amber-600 to-amber-800" },
+      { name: "Création visuelle simple", level: 35, color: "from-amber-600 to-amber-800" },
+      { name: "Meta Ads basiques", level: 25, color: "from-amber-600 to-amber-800" },
+      { name: "Google Ads basiques", level: 20, color: "from-amber-600 to-amber-800" },
+      { name: "Analyse campagnes", level: 30, color: "from-amber-600 to-amber-800" },
+      { name: "Stratégie réseaux sociaux", level: 30, color: "from-amber-600 to-amber-800" },
+    ],
+  },
+  {
+    title: "CRO / UX rédactionnelle",
+    emoji: "🟫",
+    skills: [
+      { name: "Amélioration de structure / clarté", level: 80, color: "from-amber-700 to-amber-900" },
+      { name: "Analyse parcours utilisateur", level: 65, color: "from-amber-700 to-amber-900" },
+      { name: "CTA & microcopy (amélioration)", level: 55, color: "from-amber-700 to-amber-900" },
+      { name: "A/B ideation", level: 45, color: "from-amber-700 to-amber-900" },
+      { name: "Argumentation / signaux de confiance", level: 60, color: "from-amber-700 to-amber-900" },
+    ],
+  },
+  {
+    title: "Email marketing",
+    emoji: "🟧",
+    skills: [
+      { name: "Rédaction newsletter", level: 80, color: "from-orange-600 to-orange-800" },
+      { name: "Analyse des performances", level: 70, color: "from-orange-600 to-orange-800" },
+      { name: "Segmentation basique", level: 50, color: "from-orange-600 to-orange-800" },
+      { name: "Automation simple", level: 40, color: "from-orange-600 to-orange-800" },
+    ],
+  },
 ];
 
 export function Skills() {
