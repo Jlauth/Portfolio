@@ -67,7 +67,7 @@ export function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="flex justify-center gap-6 mb-12"
+            className="flex justify-center gap-6 mb-20"
           >
             <Link
               href="https://github.com"
@@ -92,22 +92,23 @@ export function Hero() {
               <Mail size={28} />
             </Link>
           </motion.div>
+        </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 1 }}
-            className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
+        {/* Flèche de scroll - positionnée en dehors du conteneur principal */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 1 }}
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10"
+        >
+          <motion.a
+            href="#about"
+            animate={{ y: [0, 10, 0] }}
+            transition={{ repeat: Infinity, duration: 2 }}
+            className="text-gray-400 hover:text-white transition-colors"
           >
-            <motion.a
-              href="#about"
-              animate={{ y: [0, 10, 0] }}
-              transition={{ repeat: Infinity, duration: 2 }}
-              className="text-gray-400 hover:text-white transition-colors"
-            >
-              <ArrowDown size={32} />
-            </motion.a>
-          </motion.div>
+            <ArrowDown size={32} />
+          </motion.a>
         </motion.div>
       </div>
     </section>
