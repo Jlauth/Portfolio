@@ -53,20 +53,23 @@ export function Projects() {
   const [projects, setProjects] = useState<Project[]>(defaultProjects);
 
   useEffect(() => {
-    // Charger les projets depuis Supabase si configuré
-    const loadProjects = async () => {
-      try {
-        const supabaseProjects = await getProjects();
-        if (supabaseProjects && supabaseProjects.length > 0) {
-          setProjects(supabaseProjects);
-        }
-      } catch (error) {
-        // Si Supabase n'est pas configuré, utiliser les projets par défaut
-        console.log("Using default projects");
-      }
-    };
-
-    loadProjects();
+    // Les projets par défaut sont toujours utilisés
+    // Supabase peut servir de complément si besoin (optionnel)
+    // Pour ajouter/modifier un projet, modifiez simplement le tableau defaultProjects ci-dessus
+    setProjects(defaultProjects);
+    
+    // Optionnel : charger des projets supplémentaires depuis Supabase
+    // const loadAdditionalProjects = async () => {
+    //   try {
+    //     const supabaseProjects = await getProjects();
+    //     if (supabaseProjects && supabaseProjects.length > 0) {
+    //       setProjects([...defaultProjects, ...supabaseProjects]);
+    //     }
+    //   } catch (error) {
+    //     // Ignorer les erreurs Supabase
+    //   }
+    // };
+    // loadAdditionalProjects();
   }, []);
 
   return (
