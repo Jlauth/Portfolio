@@ -11,35 +11,24 @@ import type { Project } from "@/types";
 const defaultProjects: Project[] = [
   {
     id: "1",
-    title: "Application E-commerce",
+    title: "Boutique E-commerce PrestaShop 8.2",
     description:
-      "Plateforme e-commerce moderne avec paiement en ligne, gestion de panier et dashboard administrateur.",
+      "Boutique en ligne complète pour la vente de matériel de cuisine. Développement sur PrestaShop 8.2 avec personnalisation de modules, overrides Smarty et optimisation des performances.",
     image_url: null,
-    technologies: ["Next.js", "TypeScript", "Supabase", "Stripe"],
-    github_url: "https://github.com",
-    demo_url: "https://example.com",
+    technologies: ["PrestaShop 8.2", "PHP", "Smarty", "MySQL", "CSS/JS"],
+    github_url: null,
+    demo_url: null,
     created_at: new Date().toISOString(),
   },
   {
     id: "2",
-    title: "Dashboard Analytics",
+    title: "Site WordPress Garage Automobile",
     description:
-      "Tableau de bord interactif pour visualiser et analyser des données en temps réel avec graphiques dynamiques.",
+      "Site vitrine professionnel pour un garage automobile développé avec WordPress et Elementor Pro. Design responsive, optimisation SEO et intégration de formulaires de contact.",
     image_url: null,
-    technologies: ["React", "TypeScript", "Chart.js", "Supabase"],
-    github_url: "https://github.com",
-    demo_url: "https://example.com",
-    created_at: new Date().toISOString(),
-  },
-  {
-    id: "3",
-    title: "Application de Gestion",
-    description:
-      "Application web complète pour la gestion de projets avec authentification, CRUD et notifications.",
-    image_url: null,
-    technologies: ["Next.js", "Prisma", "PostgreSQL", "Tailwind CSS"],
-    github_url: "https://github.com",
-    demo_url: "https://example.com",
+    technologies: ["WordPress", "Elementor Pro", "PHP", "CSS", "SEO"],
+    github_url: null,
+    demo_url: null,
     created_at: new Date().toISOString(),
   },
 ];
@@ -90,7 +79,7 @@ export function Projects() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {projects.map((project, index) => (
             <motion.div
               key={project.id}
