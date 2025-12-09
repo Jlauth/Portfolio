@@ -35,11 +35,21 @@ export const defaultProjects: DefaultProject[] = [
   },
   {
     id: "3",
-    title: "Omniflamme - Mise à jour E-commerce",
+    title: "Omniflamme 9.0.1 - Mise à jour E-commerce",
     description:
       "Mise à jour et amélioration d'une boutique e-commerce existante avec développement de nombreux modules custom. Inclut un module innovant développé en Three.js pour une expérience 3D interactive et immersive.",
     image_url: null,
     technologies: ["PrestaShop", "PHP", "Three.js", "JavaScript", "Modules Custom", "3D"],
+    github_url: null,
+    demo_url: null,
+  },
+  {
+    id: "4",
+    title: "Projet Test",
+    description:
+      "Projet de test pour vérifier la synchronisation automatique entre le code et Supabase. Ce projet sera automatiquement ajouté à la base de données lors du prochain chargement.",
+    image_url: null,
+    technologies: ["Test", "Synchronisation", "Supabase"],
     github_url: null,
     demo_url: null,
   },
