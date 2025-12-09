@@ -1,7 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { useState, useEffect } from "react";
+import { ChevronDown } from "lucide-react";
 
 interface SkillCategory {
   title: string;
@@ -202,9 +204,21 @@ const skillCategories: SkillCategory[] = [
 
 export function Skills() {
   const [ref, inView] = useInView({
-    triggerOnce: true,
+    triggerOnce: false,
     threshold: 0.1,
   });
+  const [openCategory, setOpenCategory] = useState<string | null>(null);
+
+  // Fermer toutes les catégories quand on sort de la section
+  useEffect(() => {
+    if (!inView) {
+      setOpenCategory(null);
+    }
+  }, [inView]);
+
+  const toggleCategory = (title: string) => {
+    setOpenCategory(openCategory === title ? null : title);
+  };
 
   return (
     <section
@@ -227,51 +241,88 @@ export function Skills() {
           </p>
         </motion.div>
 
-        <div className="space-y-12 max-w-6xl mx-auto">
-          {skillCategories.map((category, categoryIndex) => (
-            <motion.div
-              key={category.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
-              className="bg-gray-800/30 backdrop-blur-sm p-6 rounded-xl border border-gray-700"
-            >
-              <h3 className="text-2xl font-bold mb-6 text-white flex items-center gap-2">
-                <span>{category.emoji}</span>
-                <span>{category.title}</span>
-              </h3>
-              <div className="grid md:grid-cols-2 gap-4">
-                {category.skills.map((skill, skillIndex) => (
+        <div className="space-y-4 max-w-6xl mx-auto">
+          {skillCategories.map((category, categoryIndex) => {
+            const isOpen = openCategory === category.title;
+            
+            return (
+              <motion.div
+                key={category.title}
+                initial={{ opacity: 0, y: 20 }}
+                animate={inView ? { opacity: 1, y: 0 } : { opacity: 0.5 }}
+                transition={{ duration: 0.4, delay: categoryIndex * 0.05 }}
+                className="bg-gray-800/30 backdrop-blur-sm rounded-xl border border-gray-700 overflow-hidden transition-all duration-300 hover:border-purple-500/50"
+              >
+                {/* En-tête cliquable */}
+                <button
+                  onClick={() => toggleCategory(category.title)}
+                  className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-gray-800/50 transition-colors duration-200"
+                >
+                  <h3 className="text-xl md:text-2xl font-bold text-white flex items-center gap-3">
+                    <span className="text-2xl">{category.emoji}</span>
+                    <span>{category.title}</span>
+                  </h3>
                   <motion.div
-                    key={skill.name}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={inView ? { opacity: 1, x: 0 } : {}}
-                    transition={{ 
-                      duration: 0.6, 
-                      delay: categoryIndex * 0.1 + skillIndex * 0.05 
-                    }}
-                    className="bg-gray-900/50 p-4 rounded-lg border border-gray-700/50"
+                    animate={{ rotate: isOpen ? 180 : 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className="flex-shrink-0"
                   >
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-white text-sm font-medium">{skill.name}</span>
-                      <span className="text-gray-400 text-xs">{skill.level}%</span>
-                    </div>
-                    <div className="w-full bg-gray-700 rounded-full h-2.5 overflow-hidden">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        animate={inView ? { width: `${skill.level}%` } : {}}
-                        transition={{ 
-                          duration: 1, 
-                          delay: categoryIndex * 0.1 + skillIndex * 0.05 + 0.3 
-                        }}
-                        className={`h-full bg-gradient-to-r ${skill.color} rounded-full`}
-                      />
-                    </div>
+                    <ChevronDown 
+                      size={24} 
+                      className="text-gray-400 transition-colors duration-200"
+                    />
                   </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          ))}
+                </button>
+
+                {/* Contenu dépliable */}
+                <AnimatePresence>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-6 pb-6 pt-2">
+                        <div className="grid md:grid-cols-2 gap-4">
+                          {category.skills.map((skill, skillIndex) => (
+                            <motion.div
+                              key={skill.name}
+                              initial={{ opacity: 0, y: -10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ 
+                                duration: 0.4, 
+                                delay: skillIndex * 0.05 
+                              }}
+                              className="bg-gray-900/50 p-4 rounded-lg border border-gray-700/50 hover:border-gray-600/50 transition-colors"
+                            >
+                              <div className="flex justify-between items-center mb-2">
+                                <span className="text-white text-sm font-medium">{skill.name}</span>
+                                <span className="text-gray-400 text-xs font-semibold">{skill.level}%</span>
+                              </div>
+                              <div className="w-full bg-gray-700 rounded-full h-2.5 overflow-hidden">
+                                <motion.div
+                                  initial={{ width: 0 }}
+                                  animate={{ width: `${skill.level}%` }}
+                                  transition={{ 
+                                    duration: 0.8, 
+                                    delay: skillIndex * 0.05 + 0.2,
+                                    ease: "easeOut"
+                                  }}
+                                  className={`h-full bg-gradient-to-r ${skill.color} rounded-full shadow-lg`}
+                                />
+                              </div>
+                            </motion.div>
+                          ))}
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
