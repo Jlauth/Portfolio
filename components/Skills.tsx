@@ -250,12 +250,12 @@ export function Skills() {
                 key={category.title}
                 initial={{ opacity: 1 }}
                 animate={{ opacity: 1 }}
-                className="bg-gray-800/30 backdrop-blur-sm rounded-xl border border-gray-700 overflow-hidden transition-all duration-300 hover:border-purple-500/50"
+                className="bg-gray-800/30 backdrop-blur-sm rounded-xl border border-gray-700 overflow-hidden transition-all duration-300"
               >
                 {/* En-tête cliquable */}
                 <button
                   onClick={() => toggleCategory(category.title)}
-                  className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-gray-800/50 transition-colors duration-200"
+                  className="w-full px-6 py-5 flex items-center justify-between text-left transition-colors duration-200"
                 >
                   <h3 className="text-xl md:text-2xl font-bold text-white flex items-center gap-3">
                     <span className="text-2xl">{category.emoji}</span>
