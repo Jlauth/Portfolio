@@ -1,0 +1,95 @@
+# Portfolio Développeur Web
+
+Portfolio moderne créé avec Next.js 14, TypeScript, Tailwind CSS, Supabase et déployé sur Vercel.
+
+## 🚀 Technologies
+
+- **Next.js 14** - Framework React avec App Router
+- **TypeScript** - Typage statique
+- **Tailwind CSS** - Framework CSS utilitaire
+- **Framer Motion** - Animations fluides
+- **Supabase** - Backend et base de données
+- **Vercel** - Déploiement et hosting
+
+## 📦 Installation
+
+1. Clonez le repository :
+```bash
+git clone <votre-repo>
+cd folio
+```
+
+2. Installez les dépendances :
+```bash
+npm install
+```
+
+3. Configurez les variables d'environnement :
+```bash
+cp .env.example .env.local
+```
+
+Remplissez les variables dans `.env.local` :
+- `NEXT_PUBLIC_SUPABASE_URL` - URL de votre projet Supabase
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY` - Clé anonyme de votre projet Supabase
+
+## 🗄️ Configuration Supabase
+
+1. Créez un projet sur [Supabase](https://supabase.com)
+
+2. Créez la table `contacts` :
+```sql
+CREATE TABLE contacts (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  name TEXT NOT NULL,
+  email TEXT NOT NULL,
+  message TEXT NOT NULL,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+```
+
+3. Créez la table `projects` (optionnel) :
+```sql
+CREATE TABLE projects (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  title TEXT NOT NULL,
+  description TEXT,
+  image_url TEXT,
+  technologies TEXT[],
+  github_url TEXT,
+  demo_url TEXT,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+```
+
+4. Activez Row Level Security (RLS) si nécessaire :
+```sql
+ALTER TABLE contacts ENABLE ROW LEVEL SECURITY;
+ALTER TABLE projects ENABLE ROW LEVEL SECURITY;
+```
+
+## 🎨 Personnalisation
+
+- Modifiez les informations dans `components/Hero.tsx`
+- Ajoutez vos projets dans `components/Projects.tsx` ou connectez-vous à Supabase
+- Personnalisez les couleurs dans `tailwind.config.ts`
+- Mettez à jour les liens sociaux dans les composants
+
+## 🚀 Déploiement sur Vercel
+
+1. Poussez votre code sur GitHub
+2. Connectez votre repository à [Vercel](https://vercel.com)
+3. Ajoutez les variables d'environnement dans les paramètres du projet Vercel
+4. Déployez !
+
+## 📝 Scripts disponibles
+
+- `npm run dev` - Démarre le serveur de développement
+- `npm run build` - Construit l'application pour la production
+- `npm run start` - Démarre le serveur de production
+- `npm run lint` - Lance le linter
+
+## 📄 Licence
+
+MIT
+
