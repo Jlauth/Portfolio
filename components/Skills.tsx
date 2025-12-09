@@ -248,9 +248,8 @@ export function Skills() {
             return (
               <motion.div
                 key={category.title}
-                initial={{ opacity: 0, y: 20 }}
-                animate={inView ? { opacity: 1, y: 0 } : { opacity: 0.5 }}
-                transition={{ duration: 0.4, delay: categoryIndex * 0.05 }}
+                initial={{ opacity: 1 }}
+                animate={{ opacity: 1 }}
                 className="bg-gray-800/30 backdrop-blur-sm rounded-xl border border-gray-700 overflow-hidden transition-all duration-300 hover:border-purple-500/50"
               >
                 {/* En-tête cliquable */}
