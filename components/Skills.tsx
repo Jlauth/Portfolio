@@ -16,11 +16,11 @@ const skillCategories: SkillCategory[] = [
     title: "CMS : WordPress",
     emoji: "🟦",
     skills: [
-      { name: "Intégration / thèmes", level: 80, color: "from-blue-400 to-blue-600" },
-      { name: "Hooks & filtres (avec IA)", level: 65, color: "from-blue-400 to-blue-600" },
-      { name: "Développement de plugins", level: 50, color: "from-blue-400 to-blue-600" },
-      { name: "ACF / CPT", level: 70, color: "from-blue-400 to-blue-600" },
-      { name: "Sécurité & maintenance", level: 75, color: "from-blue-400 to-blue-600" },
+      { name: "Intégration / thèmes", level: 80, color: "from-green-400 to-emerald-600" },
+      { name: "Hooks & filtres (avec IA)", level: 65, color: "from-green-400 to-emerald-600" },
+      { name: "Développement de plugins", level: 50, color: "from-green-400 to-emerald-600" },
+      { name: "ACF / CPT", level: 70, color: "from-green-400 to-emerald-600" },
+      { name: "Sécurité & maintenance", level: 75, color: "from-green-400 to-emerald-600" },
     ],
   },
   {
@@ -57,12 +57,12 @@ const skillCategories: SkillCategory[] = [
     title: "DevOps / Serveurs",
     emoji: "🐳",
     skills: [
-      { name: "Docker (run / compose basique)", level: 55, color: "from-blue-300 to-blue-500" },
-      { name: "Dockerfile (modifications simples)", level: 45, color: "from-blue-300 to-blue-500" },
-      { name: "Linux (CMD, SSH, droits, apt)", level: 65, color: "from-blue-300 to-blue-500" },
-      { name: "Gestion Apache/Nginx", level: 40, color: "from-blue-300 to-blue-500" },
-      { name: "Déploiement Git (pull serveur)", level: 70, color: "from-blue-300 to-blue-500" },
-      { name: "FTP/SFTP classique", level: 85, color: "from-blue-300 to-blue-500" },
+      { name: "Docker (run / compose basique)", level: 55, color: "from-green-300 to-emerald-500" },
+      { name: "Dockerfile (modifications simples)", level: 45, color: "from-green-300 to-emerald-500" },
+      { name: "Linux (CMD, SSH, droits, apt)", level: 65, color: "from-green-300 to-emerald-500" },
+      { name: "Gestion Apache/Nginx", level: 40, color: "from-green-300 to-emerald-500" },
+      { name: "Déploiement Git (pull serveur)", level: 70, color: "from-green-300 to-emerald-500" },
+      { name: "FTP/SFTP classique", level: 85, color: "from-green-300 to-emerald-500" },
     ],
   },
   {
@@ -83,9 +83,9 @@ const skillCategories: SkillCategory[] = [
     title: "Sécurité",
     emoji: "🔐",
     skills: [
-      { name: "Sécurité WP/PS (base + outils)", level: 70, color: "from-purple-400 to-purple-600" },
-      { name: "Durcissement serveur", level: 40, color: "from-purple-400 to-purple-600" },
-      { name: "Sécurité code (XSS/CSRF)", level: 30, color: "from-purple-400 to-purple-600" },
+      { name: "Sécurité WP/PS (base + outils)", level: 70, color: "from-green-400 to-emerald-600" },
+      { name: "Durcissement serveur", level: 40, color: "from-green-400 to-emerald-600" },
+      { name: "Sécurité code (XSS/CSRF)", level: 30, color: "from-green-400 to-emerald-600" },
     ],
   },
   {
@@ -110,12 +110,12 @@ const skillCategories: SkillCategory[] = [
     title: "SEO Technique",
     emoji: "🟦",
     skills: [
-      { name: "Balises meta / OG / structure", level: 90, color: "from-blue-500 to-blue-700" },
-      { name: "Robots.txt / Sitemap / 301", level: 85, color: "from-blue-500 to-blue-700" },
-      { name: "Performance SEO", level: 85, color: "from-blue-500 to-blue-700" },
-      { name: "Search Console (erreurs & optimisation)", level: 80, color: "from-blue-500 to-blue-700" },
-      { name: "Données structurées (schema.org)", level: 75, color: "from-blue-500 to-blue-700" },
-      { name: "Canonical / duplicate / hreflang", level: 70, color: "from-blue-500 to-blue-700" },
+      { name: "Balises meta / OG / structure", level: 90, color: "from-green-500 to-emerald-700" },
+      { name: "Robots.txt / Sitemap / 301", level: 85, color: "from-green-500 to-emerald-700" },
+      { name: "Performance SEO", level: 85, color: "from-green-500 to-emerald-700" },
+      { name: "Search Console (erreurs & optimisation)", level: 80, color: "from-green-500 to-emerald-700" },
+      { name: "Données structurées (schema.org)", level: 75, color: "from-green-500 to-emerald-700" },
+      { name: "Canonical / duplicate / hreflang", level: 70, color: "from-green-500 to-emerald-700" },
     ],
   },
   {
@@ -147,12 +147,12 @@ const skillCategories: SkillCategory[] = [
     title: "Stratégie éditoriale",
     emoji: "🟪",
     skills: [
-      { name: "Personas & intentions", level: 85, color: "from-purple-500 to-purple-700" },
-      { name: "Calendrier éditorial", level: 80, color: "from-purple-500 to-purple-700" },
-      { name: "Opportunités SEO / contenu", level: 85, color: "from-purple-500 to-purple-700" },
-      { name: "Priorisation par volume & intention", level: 80, color: "from-purple-500 to-purple-700" },
-      { name: "Analyse concurrentielle", level: 75, color: "from-purple-500 to-purple-700" },
-      { name: "Architecture sémantique (silos/clusters)", level: 70, color: "from-purple-500 to-purple-700" },
+      { name: "Personas & intentions", level: 85, color: "from-green-500 to-emerald-700" },
+      { name: "Calendrier éditorial", level: 80, color: "from-green-500 to-emerald-700" },
+      { name: "Opportunités SEO / contenu", level: 85, color: "from-green-500 to-emerald-700" },
+      { name: "Priorisation par volume & intention", level: 80, color: "from-green-500 to-emerald-700" },
+      { name: "Analyse concurrentielle", level: 75, color: "from-green-500 to-emerald-700" },
+      { name: "Architecture sémantique (silos/clusters)", level: 70, color: "from-green-500 to-emerald-700" },
     ],
   },
   {
@@ -233,7 +233,7 @@ export function Skills() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
             Compétences
           </h2>
           <p className="text-xl text-gray-300">
@@ -255,7 +255,7 @@ export function Skills() {
                 {/* En-tête cliquable */}
                 <button
                   onClick={() => toggleCategory(category.title)}
-                  className="w-full px-6 py-5 flex items-center justify-between text-left transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900 rounded-lg"
+                  className="w-full px-6 py-5 flex items-center justify-between text-left transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900 rounded-lg"
                 >
                   <h3 className="text-xl md:text-2xl font-bold text-white flex items-center gap-3">
                     <span className="text-2xl">{category.emoji}</span>

@@ -44,7 +44,7 @@ export function About() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
             À propos de moi
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
@@ -60,9 +60,9 @@ export function About() {
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: index * 0.2 }}
-              className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-xl border border-gray-700 hover:border-purple-500 transition-all duration-300"
+              className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-xl border border-gray-700 hover:border-green-500 transition-all duration-300"
             >
-              <feature.icon className="w-12 h-12 text-purple-400 mb-4" />
+              <feature.icon className="w-12 h-12 text-green-400 mb-4" />
               <h3 className="text-2xl font-semibold mb-3 text-white">
                 {feature.title}
               </h3>

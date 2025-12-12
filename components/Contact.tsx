@@ -49,7 +49,7 @@ export function Contact() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
             Contactez-moi
           </h2>
           <p className="text-xl text-gray-300">
@@ -76,15 +76,15 @@ export function Contact() {
 
             <div className="space-y-4">
               <div className="flex items-center gap-4 text-gray-300">
-                <Mail className="text-purple-400" size={24} />
+                <Mail className="text-green-400" size={24} />
                 <span>contact@example.com</span>
               </div>
               <div className="flex items-center gap-4 text-gray-300">
-                <Phone className="text-purple-400" size={24} />
+                <Phone className="text-green-400" size={24} />
                 <span>+33 6 12 34 56 78</span>
               </div>
               <div className="flex items-center gap-4 text-gray-300">
-                <MapPin className="text-purple-400" size={24} />
+                <MapPin className="text-green-400" size={24} />
                 <span>Paris, France</span>
               </div>
             </div>
@@ -113,7 +113,7 @@ export function Contact() {
                   onChange={(e) =>
                     setFormData({ ...formData, name: e.target.value })
                   }
-                  className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-purple-500 focus-visible:ring-2 focus-visible:ring-purple-400/30 focus-visible:ring-offset-0 transition-colors"
+                  className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-green-500 focus-visible:ring-2 focus-visible:ring-green-400/30 focus-visible:ring-offset-0 transition-colors"
                   placeholder="Votre nom"
                 />
               </div>
@@ -133,7 +133,7 @@ export function Contact() {
                   onChange={(e) =>
                     setFormData({ ...formData, email: e.target.value })
                   }
-                  className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-purple-500 focus-visible:ring-2 focus-visible:ring-purple-400/30 focus-visible:ring-offset-0 transition-colors"
+                  className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-green-500 focus-visible:ring-2 focus-visible:ring-green-400/30 focus-visible:ring-offset-0 transition-colors"
                   placeholder="votre@email.com"
                 />
               </div>
@@ -153,7 +153,7 @@ export function Contact() {
                   onChange={(e) =>
                     setFormData({ ...formData, message: e.target.value })
                   }
-                  className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-purple-500 focus-visible:ring-2 focus-visible:ring-purple-400/30 focus-visible:ring-offset-0 transition-colors resize-none"
+                  className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-green-500 focus-visible:ring-2 focus-visible:ring-green-400/30 focus-visible:ring-offset-0 transition-colors resize-none"
                   placeholder="Votre message..."
                 />
               </div>
@@ -161,7 +161,7 @@ export function Contact() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-purple-500/50 transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-purple-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-800"
+                className="w-full px-6 py-3 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-green-500/50 transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-green-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-800"
               >
                 {isSubmitting ? (
                   "Envoi en cours..."
