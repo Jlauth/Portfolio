@@ -21,6 +21,7 @@ export function Projects() {
   });
 
   const [projects, setProjects] = useState<Project[]>(defaultProjects);
+  const [isInitialized, setIsInitialized] = useState(true);
 
   useEffect(() => {
     // Synchroniser les projets du code avec Supabase au premier chargement
@@ -32,15 +33,20 @@ export function Projects() {
         // Charger les projets depuis Supabase
         const supabaseProjects = await getProjects();
         if (supabaseProjects && supabaseProjects.length > 0) {
-          setProjects(supabaseProjects);
-        } else {
-          // Fallback : utiliser les projets par défaut si Supabase est vide
-          setProjects(defaultProjects);
+          // Ne mettre à jour que si les projets sont différents pour éviter le clignotement
+          setProjects((prevProjects) => {
+            // Comparer les IDs pour éviter les mises à jour inutiles
+            const prevIds = prevProjects.map(p => p.id).sort().join(',');
+            const newIds = supabaseProjects.map(p => p.id).sort().join(',');
+            return prevIds === newIds ? prevProjects : supabaseProjects;
+          });
         }
+        // Ne pas changer si Supabase est vide, garder les projets par défaut
       } catch (error) {
-        // Si Supabase n'est pas configuré, utiliser les projets par défaut
+        // Si Supabase n'est pas configuré, garder les projets par défaut
         console.log("Supabase non configuré, utilisation des projets par défaut");
-        setProjects(defaultProjects);
+      } catch (error) {
+        // Erreur déjà gérée plus haut
       }
     };
 
@@ -73,8 +79,8 @@ export function Projects() {
             <motion.div
               key={project.id}
               initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
+              animate={inView && isInitialized ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
               className="bg-gray-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-700 hover:border-purple-500 transition-all duration-300 group"
             >
               <div className="relative h-48 bg-gradient-to-br from-purple-600 to-blue-600 overflow-hidden">
