@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
+import { RecaptchaProvider } from "@/components/RecaptchaProvider";
 
 export const metadata: Metadata = {
   title: "Portfolio Développeur Web",
@@ -16,9 +17,11 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body className="antialiased">
-        <Navigation />
-        <main className="min-h-screen">{children}</main>
-        <Footer />
+        <RecaptchaProvider>
+          <Navigation />
+          <main className="min-h-screen">{children}</main>
+          <Footer />
+        </RecaptchaProvider>
       </body>
     </html>
   );

@@ -3,7 +3,8 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useState } from "react";
-import { Send, Mail, MapPin, Phone } from "lucide-react";
+import { Send } from "lucide-react";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { submitContactForm } from "@/lib/supabase";
 
 export function Contact() {
@@ -12,25 +13,39 @@ export function Contact() {
     threshold: 0.1,
   });
 
+  const { executeRecaptcha } = useGoogleReCaptcha();
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
+    website: "", // Honeypot field
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus("idle");
+    setErrorMessage("");
 
     try {
-      await submitContactForm(formData);
+      // Générer le token reCAPTCHA
+      let recaptchaToken = "";
+      if (executeRecaptcha) {
+        recaptchaToken = await executeRecaptcha("contact_form");
+      }
+
+      await submitContactForm(formData, recaptchaToken);
       setSubmitStatus("success");
-      setFormData({ name: "", email: "", message: "" });
+      setFormData({ name: "", email: "", message: "", website: "" });
     } catch (error) {
       setSubmitStatus("error");
+      setErrorMessage(
+        error instanceof Error ? error.message : "Erreur lors de l'envoi. Veuillez réessayer."
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -53,49 +68,17 @@ export function Contact() {
             Contactez-moi
           </h2>
           <p className="text-xl text-gray-300">
-            Discutons de votre prochain projet
+            Utilisez le formulaire ci-dessous pour me contacter
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="space-y-6"
-          >
-            <div>
-              <h3 className="text-2xl font-semibold mb-4 text-white">
-                Informations de contact
-              </h3>
-              <p className="text-gray-300 mb-6">
-                N'hésitez pas à me contacter pour discuter de vos projets ou
-                pour toute question.
-              </p>
-            </div>
-
-            <div className="space-y-4">
-              <div className="flex items-center gap-4 text-gray-300">
-                <Mail className="text-green-400" size={24} />
-                <span>contact@example.com</span>
-              </div>
-              <div className="flex items-center gap-4 text-gray-300">
-                <Phone className="text-green-400" size={24} />
-                <span>+33 6 12 34 56 78</span>
-              </div>
-              <div className="flex items-center gap-4 text-gray-300">
-                <MapPin className="text-green-400" size={24} />
-                <span>Paris, France</span>
-              </div>
-            </div>
-          </motion.div>
-
+        <div className="max-w-2xl mx-auto">
           <motion.form
             initial={{ opacity: 0, x: 20 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.4 }}
             onSubmit={handleSubmit}
-            className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-xl border border-gray-700"
+            className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-xl border border-gray-700 relative"
           >
             <div className="space-y-6">
               <div>
@@ -109,6 +92,8 @@ export function Contact() {
                   type="text"
                   id="name"
                   required
+                  minLength={2}
+                  maxLength={100}
                   value={formData.name}
                   onChange={(e) =>
                     setFormData({ ...formData, name: e.target.value })
@@ -129,6 +114,7 @@ export function Contact() {
                   type="email"
                   id="email"
                   required
+                  maxLength={254}
                   value={formData.email}
                   onChange={(e) =>
                     setFormData({ ...formData, email: e.target.value })
@@ -148,6 +134,8 @@ export function Contact() {
                 <textarea
                   id="message"
                   required
+                  minLength={10}
+                  maxLength={2000}
                   rows={5}
                   value={formData.message}
                   onChange={(e) =>
@@ -155,6 +143,22 @@ export function Contact() {
                   }
                   className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-green-500 focus-visible:ring-2 focus-visible:ring-green-400/30 focus-visible:ring-offset-0 transition-colors resize-none"
                   placeholder="Votre message..."
+                />
+              </div>
+
+              {/* Honeypot field - caché pour les humains, visible pour les bots */}
+              <div className="absolute opacity-0 pointer-events-none h-0 w-0 overflow-hidden" aria-hidden="true">
+                <label htmlFor="website">Ne pas remplir ce champ</label>
+                <input
+                  type="text"
+                  id="website"
+                  name="website"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={formData.website}
+                  onChange={(e) =>
+                    setFormData({ ...formData, website: e.target.value })
+                  }
                 />
               </div>
 
@@ -180,7 +184,7 @@ export function Contact() {
               )}
               {submitStatus === "error" && (
                 <p className="text-red-400 text-sm text-center">
-                  Erreur lors de l'envoi. Veuillez réessayer.
+                  {errorMessage || "Erreur lors de l'envoi. Veuillez réessayer."}
                 </p>
               )}
             </div>

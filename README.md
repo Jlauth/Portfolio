@@ -32,6 +32,8 @@ cp .env.example .env.local
 Remplissez les variables dans `.env.local` :
 - `NEXT_PUBLIC_SUPABASE_URL` - URL de votre projet Supabase
 - `NEXT_PUBLIC_SUPABASE_ANON_KEY` - Clé anonyme de votre projet Supabase
+- `NEXT_PUBLIC_RECAPTCHA_SITE_KEY` - Clé publique reCAPTCHA v3 (optionnel)
+- `RECAPTCHA_SECRET_KEY` - Clé secrète reCAPTCHA v3 (optionnel)
 
 ## 🗄️ Configuration Supabase
 
@@ -67,6 +69,19 @@ CREATE TABLE projects (
 ALTER TABLE contacts ENABLE ROW LEVEL SECURITY;
 ALTER TABLE projects ENABLE ROW LEVEL SECURITY;
 ```
+
+## 🛡️ Configuration reCAPTCHA v3 (Optionnel)
+
+Pour activer la protection anti-spam sur le formulaire de contact :
+
+1. Créez un site reCAPTCHA v3 sur [Google reCAPTCHA](https://www.google.com/recaptcha/admin)
+2. Ajoutez votre domaine (ex: `localhost` pour le développement, votre domaine pour la production)
+3. Copiez la **Site Key** et la **Secret Key**
+4. Ajoutez-les dans `.env.local` :
+   - `NEXT_PUBLIC_RECAPTCHA_SITE_KEY` - La clé publique (commence par `6L...`)
+   - `RECAPTCHA_SECRET_KEY` - La clé secrète (commence par `6L...`)
+
+**Note** : Si les clés ne sont pas configurées, le formulaire fonctionnera toujours mais sans protection reCAPTCHA.
 
 ## 🎨 Personnalisation
 

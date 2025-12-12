@@ -15,25 +15,25 @@ export interface ContactFormData {
   message: string;
 }
 
-export async function submitContactForm(data: ContactFormData) {
-  if (!supabase) {
-    // Si Supabase n'est pas configuré, simuler un succès ou logger l'erreur
-    console.warn("Supabase n'est pas configuré. Le message n'a pas été enregistré.");
-    return;
-  }
-
-  const { error } = await supabase.from("contacts").insert([
-    {
-      name: data.name,
-      email: data.email,
-      message: data.message,
-      created_at: new Date().toISOString(),
+export async function submitContactForm(data: ContactFormData, recaptchaToken?: string) {
+  // Utiliser l'API route sécurisée au lieu d'appeler Supabase directement
+  const response = await fetch("/api/contact", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
     },
-  ]);
+    body: JSON.stringify({
+      ...data,
+      recaptchaToken,
+    }),
+  });
 
-  if (error) {
-    throw error;
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.error || "Erreur lors de l'envoi du message");
   }
+
+  return await response.json();
 }
 
 export async function getProjects() {
