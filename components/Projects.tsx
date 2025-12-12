@@ -45,8 +45,6 @@ export function Projects() {
       } catch (error) {
         // Si Supabase n'est pas configuré, garder les projets par défaut
         console.log("Supabase non configuré, utilisation des projets par défaut");
-      } catch (error) {
-        // Erreur déjà gérée plus haut
       }
     };
 
@@ -66,7 +64,7 @@ export function Projects() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
             Projets
           </h2>
           <p className="text-xl text-gray-300">
@@ -81,9 +79,9 @@ export function Projects() {
               initial={{ opacity: 0, y: 20 }}
               animate={inView && isInitialized ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="bg-gray-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-700 hover:border-purple-500 transition-all duration-300 group"
+              className="bg-gray-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-700 hover:border-green-500 transition-all duration-300 group"
             >
-              <div className="relative h-48 bg-gradient-to-br from-purple-600 to-blue-600 overflow-hidden">
+              <div className="relative h-48 bg-gradient-to-br from-green-600 to-emerald-600 overflow-hidden">
                 <div className="absolute inset-0 flex items-center justify-center">
                   <span className="text-white text-lg font-semibold">
                     {project.title}
@@ -99,7 +97,7 @@ export function Projects() {
                   {project.technologies.map((tech) => (
                     <span
                       key={tech}
-                      className="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm"
+                      className="px-3 py-1 bg-green-500/20 text-green-300 rounded-full text-sm"
                     >
                       {tech}
                     </span>
@@ -111,7 +109,7 @@ export function Projects() {
                       href={project.github_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-800 rounded"
+                      className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-800 rounded"
                     >
                       <Github size={20} />
                       <span>Code</span>
@@ -122,7 +120,7 @@ export function Projects() {
                       href={project.demo_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-800 rounded"
+                      className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-800 rounded"
                     >
                       <ExternalLink size={20} />
                       <span>Demo</span>
