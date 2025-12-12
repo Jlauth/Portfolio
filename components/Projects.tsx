@@ -105,7 +105,7 @@ export function Projects() {
                       href={project.github_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
+                      className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-800 rounded"
                     >
                       <Github size={20} />
                       <span>Code</span>
@@ -116,7 +116,7 @@ export function Projects() {
                       href={project.demo_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
+                      className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-800 rounded"
                     >
                       <ExternalLink size={20} />
                       <span>Demo</span>

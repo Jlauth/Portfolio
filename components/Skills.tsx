@@ -255,7 +255,7 @@ export function Skills() {
                 {/* En-tête cliquable */}
                 <button
                   onClick={() => toggleCategory(category.title)}
-                  className="w-full px-6 py-5 flex items-center justify-between text-left transition-colors duration-200"
+                  className="w-full px-6 py-5 flex items-center justify-between text-left transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900 rounded-lg"
                 >
                   <h3 className="text-xl md:text-2xl font-bold text-white flex items-center gap-3">
                     <span className="text-2xl">{category.emoji}</span>

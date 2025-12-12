@@ -51,13 +51,13 @@ export function Hero() {
           >
             <Link
               href="#projects"
-              className="px-8 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-purple-500/50 transition-all duration-300 transform hover:scale-105"
+              className="px-8 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-purple-500/50 transition-all duration-300 transform hover:scale-105 focus-visible:ring-2 focus-visible:ring-purple-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
             >
               Voir mes projets
             </Link>
             <Link
               href="#contact"
-              className="px-8 py-3 border-2 border-white/20 text-white rounded-lg font-semibold hover:bg-white/10 transition-all duration-300"
+              className="px-8 py-3 border-2 border-white/20 text-white rounded-lg font-semibold hover:bg-white/10 transition-all duration-300 focus-visible:ring-2 focus-visible:ring-purple-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
             >
               Me contacter
             </Link>
@@ -73,7 +73,7 @@ export function Hero() {
               href="https://github.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-white transition-colors"
+              className="text-gray-400 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded"
             >
               <Github size={28} />
             </Link>
@@ -81,13 +81,13 @@ export function Hero() {
               href="https://linkedin.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-white transition-colors"
+              className="text-gray-400 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded"
             >
               <Linkedin size={28} />
             </Link>
             <Link
               href="mailto:contact@example.com"
-              className="text-gray-400 hover:text-white transition-colors"
+              className="text-gray-400 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded"
             >
               <Mail size={28} />
             </Link>
@@ -105,7 +105,7 @@ export function Hero() {
             href="#about"
             animate={{ y: [0, 10, 0] }}
             transition={{ repeat: Infinity, duration: 2 }}
-            className="text-gray-400 hover:text-white transition-colors"
+            className="text-gray-400 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded"
           >
             <ArrowDown size={32} />
           </motion.a>

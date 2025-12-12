@@ -37,7 +37,7 @@ export function Navigation() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <Link href="/" className="text-2xl font-bold text-white">
+          <Link href="/" className="text-2xl font-bold text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded">
             Portfolio
           </Link>
 
@@ -47,7 +47,7 @@ export function Navigation() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-gray-300 hover:text-white transition-colors duration-200"
+                className="text-gray-300 hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded"
               >
                 {item.name}
               </Link>
@@ -56,7 +56,7 @@ export function Navigation() {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-white"
+            className="md:hidden text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded p-1"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -78,7 +78,7 @@ export function Navigation() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="block py-2 text-gray-300 hover:text-white transition-colors"
+                  className="block py-2 text-gray-300 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {item.name}
