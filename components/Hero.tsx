@@ -28,9 +28,7 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent"
           >
-            Développeur Web
-            <br />
-            <span className="text-4xl md:text-6xl">Full-Stack</span>
+            Jean Lauth
           </motion.h1>
 
           <motion.p
@@ -39,8 +37,8 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto"
           >
-            Je crée des expériences web modernes et performantes avec les
-            dernières technologies
+            Développeur PrestaShop, WordPress et sites vitrines. Je crée des
+            expériences web modernes et performantes.
           </motion.p>
 
           <motion.div
