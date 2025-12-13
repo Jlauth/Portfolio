@@ -29,7 +29,20 @@ function sanitizeString(input: string, maxLength: number): string {
     .trim()
     .slice(0, maxLength)
     .replace(/[<>]/g, "") // Protection XSS basique
-    .replace(/\s+/g, " "); // Normaliser les espaces
+    .replace(/\s+/g, " ") // Normaliser les espaces
+    .replace(/[&"']/g, ""); // Supprimer caractères spéciaux HTML
+}
+
+function escapeHtml(text: string): string {
+  // Échapper les caractères HTML pour une utilisation sûre dans du HTML
+  const map: { [key: string]: string } = {
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;",
+  };
+  return text.replace(/[&<>"']/g, (m) => map[m]);
 }
 
 function validateEmail(email: string): boolean {
@@ -240,23 +253,23 @@ export async function POST(request: NextRequest) {
 
     // Envoyer un email de notification (optionnel, ne bloque pas si ça échoue)
     const resendApiKey = process.env.RESEND_API_KEY;
-    const notificationEmail = process.env.NOTIFICATION_EMAIL || "lauth_jean@live.fr";
+    const notificationEmail = process.env.NOTIFICATION_EMAIL;
 
-    if (resendApiKey && resendApiKey !== "your_resend_api_key_here") {
+    if (resendApiKey && resendApiKey !== "your_resend_api_key_here" && notificationEmail) {
       try {
         const resend = new Resend(resendApiKey);
         const emailResult = await resend.emails.send({
           from: "Portfolio Contact <onboarding@resend.dev>", // Remplacez par votre domaine vérifié
           to: notificationEmail,
-          subject: `Nouveau message de contact de ${sanitizedData.name}`,
+          subject: `Nouveau message de contact de ${escapeHtml(sanitizedData.name)}`,
           html: `
             <h2>Nouveau message de contact</h2>
-            <p><strong>Nom:</strong> ${sanitizedData.name}</p>
-            <p><strong>Email:</strong> ${sanitizedData.email}</p>
+            <p><strong>Nom:</strong> ${escapeHtml(sanitizedData.name)}</p>
+            <p><strong>Email:</strong> ${escapeHtml(sanitizedData.email)}</p>
             <p><strong>Message:</strong></p>
-            <p>${sanitizedData.message.replace(/\n/g, "<br>")}</p>
+            <p>${escapeHtml(sanitizedData.message).replace(/\n/g, "<br>")}</p>
             <hr>
-            <p style="color: #666; font-size: 12px;">Message reçu le ${new Date().toLocaleString("fr-FR")}</p>
+            <p style="color: #666; font-size: 12px;">Message reçu le ${escapeHtml(new Date().toLocaleString("fr-FR"))}</p>
           `,
         });
         console.log("Email envoyé avec succès:", emailResult);
