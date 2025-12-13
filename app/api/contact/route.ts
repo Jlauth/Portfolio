@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
+import { Resend } from "resend";
 
 // Limitation simple du rate limiting (en production, utilisez Redis ou un service dédié)
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
@@ -62,8 +63,26 @@ async function verifyRecaptcha(token: string): Promise<boolean> {
     );
 
     const data = await response.json();
-    // Vérifier que la requête est réussie et que le score est acceptable (>= 0.5)
-    return data.success === true && (data.score || 0) >= 0.5;
+    
+    // Logger les détails pour le debug
+    console.log("reCAPTCHA verification result:", {
+      success: data.success,
+      score: data.score,
+      errors: data["error-codes"],
+    });
+    
+    // Vérifier que la requête est réussie et que le score est acceptable (>= 0.3 pour être plus permissif)
+    const isValid = data.success === true && (data.score || 0) >= 0.3;
+    
+    if (!isValid) {
+      console.warn("reCAPTCHA validation failed:", {
+        success: data.success,
+        score: data.score,
+        errors: data["error-codes"],
+      });
+    }
+    
+    return isValid;
   } catch (error) {
     console.error("Erreur lors de la vérification reCAPTCHA:", error);
     return false;
@@ -147,21 +166,27 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Vérifier le token reCAPTCHA
+    // Vérifier le token reCAPTCHA (optionnel en dev, obligatoire en prod)
     const recaptchaToken = body.recaptchaToken;
-    if (!recaptchaToken) {
-      return NextResponse.json(
-        { error: "Vérification de sécurité requise" },
-        { status: 400 }
-      );
-    }
+    const recaptchaSecretKey = process.env.RECAPTCHA_SECRET_KEY;
+    
+    // Si reCAPTCHA est configuré, vérifier le token
+    if (recaptchaSecretKey && recaptchaSecretKey !== "your_recaptcha_secret_key") {
+      if (!recaptchaToken) {
+        return NextResponse.json(
+          { error: "Vérification de sécurité requise" },
+          { status: 400 }
+        );
+      }
 
-    const isRecaptchaValid = await verifyRecaptcha(recaptchaToken);
-    if (!isRecaptchaValid) {
-      return NextResponse.json(
-        { error: "Échec de la vérification de sécurité. Veuillez réessayer." },
-        { status: 400 }
-      );
+      const isRecaptchaValid = await verifyRecaptcha(recaptchaToken);
+      if (!isRecaptchaValid) {
+        console.error("reCAPTCHA validation failed for token:", recaptchaToken?.substring(0, 20) + "...");
+        return NextResponse.json(
+          { error: "Échec de la vérification de sécurité. Veuillez réessayer." },
+          { status: 400 }
+        );
+      }
     }
 
     // Valider les données
@@ -211,6 +236,36 @@ export async function POST(request: NextRequest) {
         { error: "Erreur lors de l'envoi du message" },
         { status: 500 }
       );
+    }
+
+    // Envoyer un email de notification (optionnel, ne bloque pas si ça échoue)
+    const resendApiKey = process.env.RESEND_API_KEY;
+    const notificationEmail = process.env.NOTIFICATION_EMAIL || "lauth_jean@live.fr";
+
+    if (resendApiKey && resendApiKey !== "your_resend_api_key_here") {
+      try {
+        const resend = new Resend(resendApiKey);
+        const emailResult = await resend.emails.send({
+          from: "Portfolio Contact <onboarding@resend.dev>", // Remplacez par votre domaine vérifié
+          to: notificationEmail,
+          subject: `Nouveau message de contact de ${sanitizedData.name}`,
+          html: `
+            <h2>Nouveau message de contact</h2>
+            <p><strong>Nom:</strong> ${sanitizedData.name}</p>
+            <p><strong>Email:</strong> ${sanitizedData.email}</p>
+            <p><strong>Message:</strong></p>
+            <p>${sanitizedData.message.replace(/\n/g, "<br>")}</p>
+            <hr>
+            <p style="color: #666; font-size: 12px;">Message reçu le ${new Date().toLocaleString("fr-FR")}</p>
+          `,
+        });
+        console.log("Email envoyé avec succès:", emailResult);
+      } catch (emailError) {
+        // Ne pas bloquer si l'email échoue, juste logger
+        console.error("Erreur lors de l'envoi de l'email:", emailError);
+      }
+    } else {
+      console.warn("RESEND_API_KEY non configurée ou invalide. Email non envoyé.");
     }
 
     return NextResponse.json(

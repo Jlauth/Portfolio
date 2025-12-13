@@ -34,6 +34,8 @@ Remplissez les variables dans `.env.local` :
 - `NEXT_PUBLIC_SUPABASE_ANON_KEY` - Clé anonyme de votre projet Supabase
 - `NEXT_PUBLIC_RECAPTCHA_SITE_KEY` - Clé publique reCAPTCHA v3 (optionnel)
 - `RECAPTCHA_SECRET_KEY` - Clé secrète reCAPTCHA v3 (optionnel)
+- `RESEND_API_KEY` - Clé API Resend pour les notifications email (optionnel)
+- `NOTIFICATION_EMAIL` - Email de destination pour les notifications (par défaut: lauth_jean@live.fr)
 
 ## 🗄️ Configuration Supabase
 
@@ -82,6 +84,18 @@ Pour activer la protection anti-spam sur le formulaire de contact :
    - `RECAPTCHA_SECRET_KEY` - La clé secrète (commence par `6L...`)
 
 **Note** : Si les clés ne sont pas configurées, le formulaire fonctionnera toujours mais sans protection reCAPTCHA.
+
+## 📧 Configuration Email (Resend) - Optionnel
+
+Pour recevoir des notifications par email lorsqu'un message est envoyé via le formulaire de contact :
+
+1. Créez un compte sur [Resend](https://resend.com) (gratuit jusqu'à 3000 emails/mois)
+2. Obtenez votre clé API dans le dashboard Resend
+3. Ajoutez dans `.env.local` :
+   - `RESEND_API_KEY` - Votre clé API Resend
+   - `NOTIFICATION_EMAIL` - Votre email de destination (par défaut: lauth_jean@live.fr)
+
+**Note** : Les messages sont toujours sauvegardés dans Supabase. L'email est une notification supplémentaire. Si Resend n'est pas configuré, les messages seront quand même sauvegardés dans Supabase.
 
 ## 🎨 Personnalisation
 

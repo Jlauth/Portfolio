@@ -13,7 +13,7 @@ export function Contact() {
     threshold: 0.1,
   });
 
-  const { executeRecaptcha } = useGoogleReCaptcha();
+  const { executeRecaptcha } = useGoogleReCaptcha() || {};
 
   const [formData, setFormData] = useState({
     name: "",
