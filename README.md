@@ -35,7 +35,7 @@ Remplissez les variables dans `.env.local` :
 - `NEXT_PUBLIC_RECAPTCHA_SITE_KEY` - Clé publique reCAPTCHA v3 (optionnel)
 - `RECAPTCHA_SECRET_KEY` - Clé secrète reCAPTCHA v3 (optionnel)
 - `RESEND_API_KEY` - Clé API Resend pour les notifications email (optionnel)
-- `NOTIFICATION_EMAIL` - Email de destination pour les notifications (par défaut: lauth_jean@live.fr)
+- `NOTIFICATION_EMAIL` - Email de destination pour les notifications (requis si RESEND_API_KEY est configuré)
 
 ## 🗄️ Configuration Supabase
 
@@ -93,7 +93,7 @@ Pour recevoir des notifications par email lorsqu'un message est envoyé via le f
 2. Obtenez votre clé API dans le dashboard Resend
 3. Ajoutez dans `.env.local` :
    - `RESEND_API_KEY` - Votre clé API Resend
-   - `NOTIFICATION_EMAIL` - Votre email de destination (par défaut: lauth_jean@live.fr)
+   - `NOTIFICATION_EMAIL` - Votre email de destination (requis si vous voulez recevoir des notifications)
 
 **Note** : Les messages sont toujours sauvegardés dans Supabase. L'email est une notification supplémentaire. Si Resend n'est pas configuré, les messages seront quand même sauvegardés dans Supabase.
 

@@ -71,8 +71,8 @@ async function verifyRecaptcha(token: string): Promise<boolean> {
       errors: data["error-codes"],
     });
     
-    // Vérifier que la requête est réussie et que le score est acceptable (>= 0.3 pour être plus permissif)
-    const isValid = data.success === true && (data.score || 0) >= 0.3;
+    // Vérifier que la requête est réussie et que le score est acceptable (>= 0.5)
+    const isValid = data.success === true && (data.score || 0) >= 0.5;
     
     if (!isValid) {
       console.warn("reCAPTCHA validation failed:", {
