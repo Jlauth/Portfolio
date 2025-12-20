@@ -1,4 +1,5 @@
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
+import { filterKeepalive } from "./keepalive";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
@@ -53,6 +54,7 @@ export async function getProjects() {
     return [];
   }
 
-  return data || [];
+  // Filtrer les enregistrements keepalive pour qu'ils ne soient jamais visibles
+  return filterKeepalive(data || []);
 }
 

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
 import { defaultProjects } from "@/data/projects";
+import { filterKeepalive, isKeepaliveProject } from "@/lib/keepalive";
 
 export async function POST(request: Request) {
   try {
@@ -12,13 +13,15 @@ export async function POST(request: Request) {
       );
     }
 
-    // Récupérer les projets existants dans Supabase
+    // Récupérer les projets existants dans Supabase (en excluant les keepalive)
     const { data: existingProjects } = await supabase
       .from("projects")
       .select("id, title");
 
+    // Filtrer les keepalive et créer un Set des titres existants
+    const filteredProjects = filterKeepalive(existingProjects || []);
     const existingTitles = new Set(
-      existingProjects?.map((p) => p.title) || []
+      filteredProjects.map((p) => p.title)
     );
 
     // Synchroniser les projets
@@ -94,8 +97,11 @@ export async function GET() {
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
+    // Filtrer les enregistrements keepalive pour qu'ils ne soient jamais visibles
+    const filteredProjects = filterKeepalive(data || []);
+
     return NextResponse.json({
-      projects: data,
+      projects: filteredProjects,
       defaultProjectsCount: defaultProjects.length,
     });
   } catch (error: any) {
