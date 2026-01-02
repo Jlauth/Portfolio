@@ -26,7 +26,7 @@ export function About() {
             À propos
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Accompagnement des PME et artisans dans leur présence en ligne, de la création à l'optimisation.
+            Création, reprise et optimisation de sites WordPress et PrestaShop.
           </p>
         </motion.div>
 
@@ -38,13 +38,10 @@ export function About() {
         >
           <div className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-xl border border-gray-700">
             <p className="text-lg text-gray-300 mb-6 leading-relaxed">
-              J'accompagne les PME et artisans dans la création, la reprise et l'optimisation de leur présence en ligne, qu'il s'agisse de sites vitrines WordPress ou de boutiques e-commerce PrestaShop.
-            </p>
-            <p className="text-lg text-gray-300 mb-6 leading-relaxed">
-              Mon cœur d'expertise reste la reprise de projets existants : sites vieillissants, performances insuffisantes, bugs en production ou SEO perfectible.
+              J'accompagne principalement des PME et des artisans, mais aussi des indépendants et porteurs de projets, dans la création, la reprise et l'optimisation de leur présence en ligne.
             </p>
             <p className="text-lg text-gray-300 leading-relaxed">
-              J'interviens aussi bien sur des projets simples que sur des problématiques techniques plus avancées.
+              J'interviens sur des projets existants ou en refonte, qu'il s'agisse de sites vitrines WordPress ou de boutiques e-commerce PrestaShop.
             </p>
           </div>
         </motion.div>

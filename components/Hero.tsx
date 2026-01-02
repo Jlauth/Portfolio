@@ -28,7 +28,7 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-green-200 to-emerald-200 bg-clip-text text-transparent"
           >
-            Développeur web pour PME et artisans
+            Développeur web & e-commerce
           </motion.h1>
 
           <motion.p
@@ -37,7 +37,7 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto"
           >
-            Sites vitrines WordPress et boutiques PrestaShop, optimisés pour la performance, la stabilité et le référencement.
+            Sites vitrines WordPress et boutiques e-commerce PrestaShop, avec un focus sur la performance, la stabilité et le référencement.
           </motion.p>
 
           <motion.div
