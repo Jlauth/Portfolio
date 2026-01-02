@@ -13,7 +13,19 @@ interface SkillCategory {
 
 const skillCategories: SkillCategory[] = [
   {
-    title: "Développement PrestaShop",
+    title: "Sites vitrines WordPress",
+    emoji: "🟦",
+    skills: [
+      { name: "Intégration / thèmes WordPress", level: 80, color: "from-green-400 to-emerald-600" },
+      { name: "Hooks & filtres WordPress", level: 65, color: "from-green-400 to-emerald-600" },
+      { name: "ACF / CPT", level: 70, color: "from-green-400 to-emerald-600" },
+      { name: "Elementor Pro", level: 75, color: "from-green-400 to-emerald-600" },
+      { name: "Sites responsive", level: 85, color: "from-green-400 to-emerald-600" },
+      { name: "Sécurité & maintenance WordPress", level: 75, color: "from-green-400 to-emerald-600" },
+    ],
+  },
+  {
+    title: "E-commerce PrestaShop",
     emoji: "🛒",
     skills: [
       { name: "Montées de version (1.7 → 8.x)", level: 80, color: "from-orange-400 to-orange-600" },
@@ -25,35 +37,25 @@ const skillCategories: SkillCategory[] = [
     ],
   },
   {
-    title: "Performance & stabilité",
+    title: "Performance & SEO",
     emoji: "⚡",
     skills: [
       { name: "Optimisation des temps de chargement", level: 85, color: "from-pink-400 to-pink-600" },
       { name: "Cache, OPcache, Smarty", level: 75, color: "from-pink-400 to-pink-600" },
-      { name: "Réduction de la dette technique", level: 80, color: "from-pink-400 to-pink-600" },
-      { name: "Optimisation backend (OPcache, Redis)", level: 70, color: "from-pink-400 to-pink-600" },
-      { name: "Lighthouse/PageSpeed diagnostics", level: 75, color: "from-pink-400 to-pink-600" },
-    ],
-  },
-  {
-    title: "SEO & conformité",
-    emoji: "🔍",
-    skills: [
       { name: "SEO technique (structure, performance, indexation)", level: 90, color: "from-green-500 to-emerald-700" },
       { name: "Mise en place et suivi Analytics", level: 80, color: "from-green-500 to-emerald-700" },
-      { name: "Conformité RGPD (cookies, formulaires, bases légales)", level: 75, color: "from-green-500 to-emerald-700" },
+      { name: "Lighthouse/PageSpeed diagnostics", level: 75, color: "from-pink-400 to-pink-600" },
       { name: "Search Console (analyse & optimisation)", level: 85, color: "from-green-500 to-emerald-700" },
-      { name: "Données structurées (schema.org)", level: 75, color: "from-green-500 to-emerald-700" },
     ],
   },
   {
-    title: "Autres",
+    title: "Maintenance & accompagnement",
     emoji: "💼",
     skills: [
-      { name: "WordPress (sites vitrines responsive)", level: 80, color: "from-green-400 to-emerald-600" },
       { name: "Travail en autonomie ou avec équipes non techniques", level: 85, color: "from-green-400 to-emerald-600" },
+      { name: "Conformité RGPD (cookies, formulaires, bases légales)", level: 75, color: "from-green-500 to-emerald-700" },
+      { name: "Réduction de la dette technique", level: 80, color: "from-pink-400 to-pink-600" },
       { name: "Notions d'infrastructure et d'hébergement", level: 65, color: "from-green-300 to-emerald-500" },
-      { name: "Linux (CMD, SSH, droits)", level: 65, color: "from-green-300 to-emerald-500" },
       { name: "Déploiement Git", level: 70, color: "from-green-300 to-emerald-500" },
     ],
   },

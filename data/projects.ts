@@ -26,6 +26,34 @@ export interface DefaultProject {
 
 export const defaultProjects: DefaultProject[] = [
   {
+    id: "2",
+    title: "Garage Ottélec - WordPress Elementor Pro",
+    description:
+      "Site vitrine professionnel pour garage automobile développé avec WordPress et Elementor Pro. Design moderne et responsive, optimisation SEO, intégration de formulaires de contact et gestion de contenu optimisée.",
+    shortDescription: "Site WordPress moderne avec Elementor Pro, optimisé SEO et responsive.",
+    image_url: null,
+    technologies: ["WordPress", "Elementor Pro", "PHP", "CSS", "SEO"],
+    github_url: null,
+    demo_url: null,
+    role: "Développement & SEO",
+    date: "2025",
+    highlights: [
+      "Design responsive moderne",
+      "Optimisation SEO complète",
+      "Intégration formulaires de contact"
+    ],
+    category: "website",
+    context: "Garage automobile indépendant nécessitant une présence en ligne professionnelle pour attirer de nouveaux clients.",
+    problem: "Site vitrine obsolète, design daté, manque de visibilité sur les moteurs de recherche, pas de formulaire de contact fonctionnel, non responsive.",
+    interventions: [
+      "Développement site WordPress avec Elementor Pro",
+      "Optimisation SEO technique et on-page",
+      "Intégration de formulaires de contact",
+      "Design responsive et moderne"
+    ],
+    result: "Site moderne et responsive, meilleure visibilité SEO, formulaire de contact fonctionnel, base technique saine pour l'avenir."
+  },
+  {
     id: "1",
     title: "STL CHR - E-commerce PrestaShop 8.2",
     description:
@@ -53,34 +81,6 @@ export const defaultProjects: DefaultProject[] = [
       "SEO technique et rédaction de fiches produit optimisées"
     ],
     result: "Site plus rapide et stable (-40% temps de chargement), base technique saine, meilleure visibilité SEO, back-office plus simple à gérer."
-  },
-  {
-    id: "2",
-    title: "Garage Ottélec - WordPress Elementor Pro",
-    description:
-      "Site vitrine professionnel pour garage automobile développé avec WordPress et Elementor Pro. Design moderne et responsive, optimisation SEO, intégration de formulaires de contact et gestion de contenu optimisée.",
-    shortDescription: "Site WordPress moderne avec Elementor Pro, optimisé SEO et responsive.",
-    image_url: null,
-    technologies: ["WordPress", "Elementor Pro", "PHP", "CSS", "SEO"],
-    github_url: null,
-    demo_url: null,
-    role: "Développement & SEO",
-    date: "2025",
-    highlights: [
-      "Design responsive moderne",
-      "Optimisation SEO complète",
-      "Intégration formulaires de contact"
-    ],
-    category: "website",
-    context: "Garage automobile indépendant nécessitant une présence en ligne professionnelle pour attirer de nouveaux clients.",
-    problem: "Site vitrine obsolète, design daté, manque de visibilité sur les moteurs de recherche, pas de formulaire de contact fonctionnel, non responsive.",
-    interventions: [
-      "Développement site WordPress avec Elementor Pro",
-      "Optimisation SEO technique et on-page",
-      "Intégration de formulaires de contact",
-      "Design responsive et moderne"
-    ],
-    result: "Site moderne et responsive, meilleure visibilité SEO, formulaire de contact fonctionnel, base technique saine pour l'avenir."
   },
   {
     id: "3",

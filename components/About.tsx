@@ -26,7 +26,7 @@ export function About() {
             À propos
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Spécialisé dans la reprise, l'optimisation et la mise à jour de boutiques e-commerce pour PME et artisans.
+            Accompagnement des PME et artisans dans leur présence en ligne, de la création à l'optimisation.
           </p>
         </motion.div>
 
@@ -38,13 +38,13 @@ export function About() {
         >
           <div className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-xl border border-gray-700">
             <p className="text-lg text-gray-300 mb-6 leading-relaxed">
-              Je travaille principalement avec des PME et des artisans disposant déjà d'un site e-commerce ou vitrine, souvent vieillissant ou mal optimisé.
+              J'accompagne les PME et artisans dans la création, la reprise et l'optimisation de leur présence en ligne, qu'il s'agisse de sites vitrines WordPress ou de boutiques e-commerce PrestaShop.
             </p>
             <p className="text-lg text-gray-300 mb-6 leading-relaxed">
-              J'interviens sur des problématiques concrètes : montées de version PrestaShop, performances insuffisantes, bugs critiques en production, SEO technique et conformité RGPD.
+              Mon cœur d'expertise reste la reprise de projets existants : sites vieillissants, performances insuffisantes, bugs en production ou SEO perfectible.
             </p>
             <p className="text-lg text-gray-300 leading-relaxed">
-              Mon objectif est de livrer des sites fiables, rapides et maintenables, pensés pour durer et soutenir l'activité commerciale.
+              J'interviens aussi bien sur des projets simples que sur des problématiques techniques plus avancées.
             </p>
           </div>
         </motion.div>
