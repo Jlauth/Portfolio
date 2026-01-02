@@ -7,6 +7,13 @@ export interface Project {
   github_url: string | null;
   demo_url: string | null;
   created_at: string;
+  // Champs optionnels pour une meilleure présentation
+  role?: string;
+  date?: string;
+  highlights?: string[];
+  results?: string;
+  category?: "ecommerce" | "website" | "seo" | "other";
+  shortDescription?: string;
 }
 
 export interface Contact {

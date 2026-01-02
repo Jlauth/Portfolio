@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink, Github, Calendar, TrendingUp, Code } from "lucide-react";
 import { useEffect, useState } from "react";
 import { getProjects } from "@/lib/supabase";
 import type { Project } from "@/types";
@@ -79,39 +79,94 @@ export function Projects() {
               initial={{ opacity: 0, y: 20 }}
               animate={inView && isInitialized ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="bg-gray-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-700 hover:border-green-500 transition-all duration-300 group"
+              className="bg-gray-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-700 hover:border-green-500 transition-all duration-300 group hover:shadow-2xl hover:shadow-green-500/10"
             >
-              <div className="relative h-48 bg-gradient-to-br from-green-600 to-emerald-600 overflow-hidden">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-white text-lg font-semibold">
-                    {project.title}
-                  </span>
-                </div>
+              {/* Image avec overlay au hover */}
+              <div className="relative h-48 bg-gradient-to-br from-green-600/20 to-emerald-600/20 overflow-hidden">
+                {project.image_url ? (
+                  <img 
+                    src={project.image_url} 
+                    alt={project.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                ) : (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <Code size={48} className="text-green-400/30" />
+                  </div>
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
+
               <div className="p-6">
-                <h3 className="text-xl font-semibold mb-3 text-white">
-                  {project.title}
-                </h3>
-                <p className="text-gray-300 mb-4">{project.description}</p>
+                {/* En-tête avec date et rôle */}
+                <div className="flex items-start justify-between mb-2">
+                  <h3 className="text-xl font-semibold text-white group-hover:text-green-400 transition-colors">
+                    {project.title}
+                  </h3>
+                  {project.date && (
+                    <span className="flex items-center gap-1 text-xs text-gray-400">
+                      <Calendar size={14} />
+                      {project.date}
+                    </span>
+                  )}
+                </div>
+
+                {project.role && (
+                  <p className="text-sm text-green-400 mb-3">{project.role}</p>
+                )}
+
+                {/* Description courte */}
+                <p className="text-gray-300 mb-4 text-sm leading-relaxed line-clamp-3">
+                  {project.shortDescription || project.description}
+                </p>
+
+                {/* Highlights (points clés) */}
+                {project.highlights && project.highlights.length > 0 && (
+                  <ul className="mb-4 space-y-1">
+                    {project.highlights.slice(0, 2).map((highlight, i) => (
+                      <li key={i} className="text-xs text-gray-400 flex items-start gap-2">
+                        <span className="text-green-400 mt-1">•</span>
+                        <span>{highlight}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+
+                {/* Résultats */}
+                {project.results && (
+                  <div className="mb-4 flex items-center gap-2 text-sm text-green-400">
+                    <TrendingUp size={16} />
+                    <span>{project.results}</span>
+                  </div>
+                )}
+
+                {/* Technologies */}
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {project.technologies.map((tech) => (
+                  {project.technologies.slice(0, 4).map((tech) => (
                     <span
                       key={tech}
-                      className="px-3 py-1 bg-green-500/20 text-green-300 rounded-full text-sm"
+                      className="px-2.5 py-1 bg-green-500/10 text-green-300 rounded-full text-xs border border-green-500/20"
                     >
                       {tech}
                     </span>
                   ))}
+                  {project.technologies.length > 4 && (
+                    <span className="px-2.5 py-1 text-gray-400 text-xs">
+                      +{project.technologies.length - 4}
+                    </span>
+                  )}
                 </div>
-                <div className="flex gap-4">
+
+                {/* Actions */}
+                <div className="flex gap-4 pt-4 border-t border-gray-700">
                   {project.github_url && (
                     <a
                       href={project.github_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-800 rounded"
+                      className="flex items-center gap-2 text-gray-400 hover:text-green-400 transition-colors text-sm"
                     >
-                      <Github size={20} />
+                      <Github size={18} />
                       <span>Code</span>
                     </a>
                   )}
@@ -120,11 +175,14 @@ export function Projects() {
                       href={project.demo_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-800 rounded"
+                      className="flex items-center gap-2 text-gray-400 hover:text-green-400 transition-colors text-sm"
                     >
-                      <ExternalLink size={20} />
-                      <span>Demo</span>
+                      <ExternalLink size={18} />
+                      <span>Voir le projet</span>
                     </a>
+                  )}
+                  {!project.github_url && !project.demo_url && (
+                    <span className="text-xs text-gray-500">Projet client (confidentiel)</span>
                   )}
                 </div>
               </div>
