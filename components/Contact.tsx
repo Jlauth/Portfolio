@@ -65,10 +65,10 @@ export function Contact() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
-            Contactez-moi
+            Discuter de votre projet
           </h2>
-          <p className="text-xl text-gray-300">
-            Utilisez le formulaire ci-dessous pour me contacter
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            J'interviens aussi bien pour des missions ponctuelles (audit technique, correction de bugs, montée de version) que pour un accompagnement long terme (maintenance, optimisation continue).
           </p>
         </motion.div>
 
@@ -142,7 +142,7 @@ export function Contact() {
                     setFormData({ ...formData, message: e.target.value })
                   }
                   className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-green-500 focus-visible:ring-2 focus-visible:ring-green-400/30 focus-visible:ring-offset-0 transition-colors resize-none"
-                  placeholder="Votre message..."
+                  placeholder="Décrivez votre projet PrestaShop, votre problématique ou votre besoin..."
                 />
               </div>
 
@@ -172,7 +172,7 @@ export function Contact() {
                 ) : (
                   <>
                     <Send size={20} />
-                    Envoyer
+                    Discuter de votre projet PrestaShop
                   </>
                 )}
               </button>

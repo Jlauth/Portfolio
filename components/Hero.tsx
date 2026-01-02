@@ -28,7 +28,7 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-green-200 to-emerald-200 bg-clip-text text-transparent"
           >
-            Jean Lauth
+            Développeur PrestaShop pour PME et artisans
           </motion.h1>
 
           <motion.p
@@ -37,8 +37,7 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto"
           >
-            Développeur PrestaShop, WordPress et sites vitrines. Je crée des
-            expériences web modernes et performantes.
+            J'optimise, mets à jour et sécurise des boutiques e-commerce existantes pour les rendre plus rapides, plus stables et mieux référencées.
           </motion.p>
 
           <motion.div
@@ -57,7 +56,7 @@ export function Hero() {
               href="#contact"
               className="px-8 py-3 border-2 border-white/20 text-white rounded-lg font-semibold hover:bg-white/10 transition-all duration-300 focus-visible:ring-2 focus-visible:ring-green-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
             >
-              Me contacter
+              Discuter de votre boutique
             </Link>
           </motion.div>
 

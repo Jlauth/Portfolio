@@ -17,6 +17,11 @@ export interface DefaultProject {
   results?: string;
   category?: "ecommerce" | "website" | "seo" | "other";
   shortDescription?: string;
+  // Nouveaux champs pour le positionnement PME/artisans
+  context?: string;
+  problem?: string;
+  interventions?: string[];
+  result?: string;
 }
 
 export const defaultProjects: DefaultProject[] = [
@@ -38,7 +43,16 @@ export const defaultProjects: DefaultProject[] = [
       "Rédaction SEO de 200+ fiches produit"
     ],
     results: "Temps de chargement -40%",
-    category: "ecommerce"
+    category: "ecommerce",
+    context: "PME spécialisée dans le matériel de cuisine professionnel (CHR). Boutique e-commerce existante nécessitant une modernisation et une optimisation.",
+    problem: "Site lent, version PrestaShop obsolète, temps de chargement élevés impactant les ventes, manque de visibilité SEO, base technique vieillissante.",
+    interventions: [
+      "Montée de version PrestaShop vers 8.2",
+      "Développement et adaptation de modules custom",
+      "Optimisation des performances (OPcache, cache)",
+      "SEO technique et rédaction de fiches produit optimisées"
+    ],
+    result: "Site plus rapide et stable (-40% temps de chargement), base technique saine, meilleure visibilité SEO, back-office plus simple à gérer."
   },
   {
     id: "2",
@@ -57,7 +71,16 @@ export const defaultProjects: DefaultProject[] = [
       "Optimisation SEO complète",
       "Intégration formulaires de contact"
     ],
-    category: "website"
+    category: "website",
+    context: "Garage automobile indépendant nécessitant une présence en ligne professionnelle pour attirer de nouveaux clients.",
+    problem: "Site vitrine obsolète, design daté, manque de visibilité sur les moteurs de recherche, pas de formulaire de contact fonctionnel, non responsive.",
+    interventions: [
+      "Développement site WordPress avec Elementor Pro",
+      "Optimisation SEO technique et on-page",
+      "Intégration de formulaires de contact",
+      "Design responsive et moderne"
+    ],
+    result: "Site moderne et responsive, meilleure visibilité SEO, formulaire de contact fonctionnel, base technique saine pour l'avenir."
   },
   {
     id: "3",
@@ -76,7 +99,16 @@ export const defaultProjects: DefaultProject[] = [
       "Développement de modules custom",
       "Amélioration UX/UI"
     ],
-    category: "ecommerce"
+    category: "ecommerce",
+    context: "Boutique e-commerce existante nécessitant une mise à jour majeure et des améliorations significatives de l'expérience utilisateur.",
+    problem: "Version PrestaShop obsolète, bugs critiques en production, UX/UI datée, manque de fonctionnalités innovantes pour se démarquer de la concurrence.",
+    interventions: [
+      "Mise à jour PrestaShop vers version récente",
+      "Développement de modules custom",
+      "Module 3D interactif (Three.js) pour expérience immersive",
+      "Amélioration UX/UI et correction de bugs critiques"
+    ],
+    result: "Site plus rapide et stable, base technique saine, expérience utilisateur améliorée avec module 3D innovant, meilleure gestion du back-office."
   },
 ];
 

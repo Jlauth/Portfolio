@@ -14,6 +14,11 @@ export interface Project {
   results?: string;
   category?: "ecommerce" | "website" | "seo" | "other";
   shortDescription?: string;
+  // Nouveaux champs pour le positionnement PME/artisans
+  context?: string;
+  problem?: string;
+  interventions?: string[];
+  result?: string;
 }
 
 export interface Contact {

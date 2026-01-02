@@ -111,32 +111,48 @@ export function Projects() {
                   )}
                 </div>
 
-                {project.role && (
-                  <p className="text-sm text-green-400 mb-3">{project.role}</p>
+                {/* Type */}
+                <p className="text-xs text-gray-500 mb-3">Projet client {project.demo_url || project.github_url ? "" : "(confidentiel)"}</p>
+
+                {/* Contexte */}
+                {project.context && (
+                  <div className="mb-4">
+                    <h4 className="text-xs font-semibold text-gray-400 mb-1">Contexte</h4>
+                    <p className="text-sm text-gray-300 leading-relaxed">{project.context}</p>
+                  </div>
                 )}
 
-                {/* Description courte */}
-                <p className="text-gray-300 mb-4 text-sm leading-relaxed line-clamp-3">
-                  {project.shortDescription || project.description}
-                </p>
-
-                {/* Highlights (points clés) */}
-                {project.highlights && project.highlights.length > 0 && (
-                  <ul className="mb-4 space-y-1">
-                    {project.highlights.slice(0, 2).map((highlight, i) => (
-                      <li key={i} className="text-xs text-gray-400 flex items-start gap-2">
-                        <span className="text-green-400 mt-1">•</span>
-                        <span>{highlight}</span>
-                      </li>
-                    ))}
-                  </ul>
+                {/* Problématique */}
+                {project.problem && (
+                  <div className="mb-4">
+                    <h4 className="text-xs font-semibold text-gray-400 mb-1">Problématique</h4>
+                    <p className="text-sm text-gray-300 leading-relaxed">{project.problem}</p>
+                  </div>
                 )}
 
-                {/* Résultats */}
-                {project.results && (
-                  <div className="mb-4 flex items-center gap-2 text-sm text-green-400">
-                    <TrendingUp size={16} />
-                    <span>{project.results}</span>
+                {/* Interventions */}
+                {project.interventions && project.interventions.length > 0 && (
+                  <div className="mb-4">
+                    <h4 className="text-xs font-semibold text-gray-400 mb-2">Interventions</h4>
+                    <ul className="space-y-1">
+                      {project.interventions.map((intervention, i) => (
+                        <li key={i} className="text-xs text-gray-400 flex items-start gap-2">
+                          <span className="text-green-400 mt-1">•</span>
+                          <span>{intervention}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {/* Résultat */}
+                {(project.result || project.results) && (
+                  <div className="mb-4">
+                    <h4 className="text-xs font-semibold text-gray-400 mb-1">Résultat</h4>
+                    <div className="flex items-start gap-2 text-sm text-green-400">
+                      <TrendingUp size={16} className="mt-0.5 flex-shrink-0" />
+                      <span>{project.result || project.results}</span>
+                    </div>
                   </div>
                 )}
 

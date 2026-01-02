@@ -2,28 +2,6 @@
 
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { Code, Rocket, Users } from "lucide-react";
-
-const features = [
-  {
-    icon: Code,
-    title: "Code Propre",
-    description:
-      "J'écris du code maintenable, testé et suivant les meilleures pratiques.",
-  },
-  {
-    icon: Rocket,
-    title: "Performance",
-    description:
-      "Optimisation pour des applications rapides et une excellente expérience utilisateur.",
-  },
-  {
-    icon: Users,
-    title: "Collaboration",
-    description:
-      "Travail en équipe avec des méthodologies agiles et une communication efficace.",
-  },
-];
 
 export function About() {
   const [ref, inView] = useInView({
@@ -45,44 +23,30 @@ export function About() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
-            À propos de moi
+            À propos
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Passionné par le développement web, je crée des solutions
-            innovantes avec les technologies les plus récentes.
+            Spécialisé dans la reprise, l'optimisation et la mise à jour de boutiques e-commerce pour PME et artisans.
           </p>
         </motion.div>
-
-        <div className="grid md:grid-cols-3 gap-8">
-          {features.map((feature, index) => (
-            <motion.div
-              key={feature.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-xl border border-gray-700 hover:border-green-500 transition-all duration-300"
-            >
-              <feature.icon className="w-12 h-12 text-green-400 mb-4" />
-              <h3 className="text-2xl font-semibold mb-3 text-white">
-                {feature.title}
-              </h3>
-              <p className="text-gray-300">{feature.description}</p>
-            </motion.div>
-          ))}
-        </div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="mt-16 text-center"
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="max-w-4xl mx-auto"
         >
-          <p className="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            Avec une expertise en développement front-end et back-end, je
-            transforme des idées en applications web performantes. Mon approche
-            combine créativité, attention aux détails et une passion pour
-            l'apprentissage continu des nouvelles technologies.
-          </p>
+          <div className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-xl border border-gray-700">
+            <p className="text-lg text-gray-300 mb-6 leading-relaxed">
+              Je travaille principalement avec des PME et des artisans disposant déjà d'un site e-commerce ou vitrine, souvent vieillissant ou mal optimisé.
+            </p>
+            <p className="text-lg text-gray-300 mb-6 leading-relaxed">
+              J'interviens sur des problématiques concrètes : montées de version PrestaShop, performances insuffisantes, bugs critiques en production, SEO technique et conformité RGPD.
+            </p>
+            <p className="text-lg text-gray-300 leading-relaxed">
+              Mon objectif est de livrer des sites fiables, rapides et maintenables, pensés pour durer et soutenir l'activité commerciale.
+            </p>
+          </div>
         </motion.div>
       </div>
     </section>
