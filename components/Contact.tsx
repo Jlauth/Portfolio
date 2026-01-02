@@ -54,8 +54,10 @@ export function Contact() {
   return (
     <section
       id="contact"
-      className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-900 to-black"
+      className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black via-gray-950 to-black relative overflow-hidden"
     >
+      {/* Background decoration */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:24px_24px]"></div>
       <div className="max-w-7xl mx-auto">
         <motion.div
           ref={ref}
@@ -64,10 +66,12 @@ export function Contact() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
-            Discuter de votre projet
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
+            <span className="bg-gradient-to-r from-white via-green-100 to-emerald-100 bg-clip-text text-transparent">
+              Discuter de votre projet
+            </span>
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-lg md:text-xl text-gray-300/80 max-w-3xl mx-auto font-light">
             J'interviens aussi bien pour des missions ponctuelles (audit technique, correction de bugs, montée de version) que pour un accompagnement long terme (maintenance, optimisation continue).
           </p>
         </motion.div>
@@ -78,9 +82,11 @@ export function Contact() {
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.4 }}
             onSubmit={handleSubmit}
-            className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-xl border border-gray-700 relative"
+            className="relative bg-gradient-to-br from-gray-900/80 via-gray-800/60 to-gray-900/80 backdrop-blur-xl p-10 rounded-2xl border border-gray-700/50 shadow-2xl shadow-black/50 hover:border-green-500/30 transition-all duration-500"
           >
-            <div className="space-y-6">
+            <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-emerald-500/5 rounded-2xl opacity-0 hover:opacity-100 transition-opacity duration-500"></div>
+            <div className="relative z-10 space-y-6"
+          >
               <div>
                 <label
                   htmlFor="name"
@@ -98,7 +104,7 @@ export function Contact() {
                   onChange={(e) =>
                     setFormData({ ...formData, name: e.target.value })
                   }
-                  className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-green-500 focus-visible:ring-2 focus-visible:ring-green-400/30 focus-visible:ring-offset-0 transition-colors"
+                  className="w-full px-4 py-3.5 bg-gray-900/60 backdrop-blur-sm border border-gray-700/50 rounded-xl text-white focus:outline-none focus:border-green-500/50 focus:bg-gray-900/80 focus-visible:ring-2 focus-visible:ring-green-400/30 focus-visible:ring-offset-0 transition-all duration-300"
                   placeholder="Votre nom"
                 />
               </div>
@@ -119,7 +125,7 @@ export function Contact() {
                   onChange={(e) =>
                     setFormData({ ...formData, email: e.target.value })
                   }
-                  className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-green-500 focus-visible:ring-2 focus-visible:ring-green-400/30 focus-visible:ring-offset-0 transition-colors"
+                  className="w-full px-4 py-3.5 bg-gray-900/60 backdrop-blur-sm border border-gray-700/50 rounded-xl text-white focus:outline-none focus:border-green-500/50 focus:bg-gray-900/80 focus-visible:ring-2 focus-visible:ring-green-400/30 focus-visible:ring-offset-0 transition-all duration-300"
                   placeholder="votre@email.com"
                 />
               </div>
@@ -141,7 +147,7 @@ export function Contact() {
                   onChange={(e) =>
                     setFormData({ ...formData, message: e.target.value })
                   }
-                  className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-green-500 focus-visible:ring-2 focus-visible:ring-green-400/30 focus-visible:ring-offset-0 transition-colors resize-none"
+                  className="w-full px-4 py-3.5 bg-gray-900/60 backdrop-blur-sm border border-gray-700/50 rounded-xl text-white focus:outline-none focus:border-green-500/50 focus:bg-gray-900/80 focus-visible:ring-2 focus-visible:ring-green-400/30 focus-visible:ring-offset-0 transition-all duration-300 resize-none"
                   placeholder="Décrivez votre projet PrestaShop, votre problématique ou votre besoin..."
                 />
               </div>
@@ -165,7 +171,10 @@ export function Contact() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full px-6 py-3 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-green-500/50 transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-green-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-800"
+                className="group relative w-full px-8 py-4 bg-gradient-to-r from-green-600 via-emerald-600 to-green-600 text-white rounded-xl font-semibold overflow-hidden transition-all duration-500 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-2xl hover:shadow-green-500/30 hover:scale-[1.02] focus-visible:ring-2 focus-visible:ring-green-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-800"
+              >
+                <span className="relative z-10">Discuter de votre projet PrestaShop</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-green-500 via-emerald-500 to-green-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               >
                 {isSubmitting ? (
                   "Envoi en cours..."

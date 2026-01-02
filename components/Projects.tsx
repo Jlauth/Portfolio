@@ -54,8 +54,10 @@ export function Projects() {
   return (
     <section
       id="projects"
-      className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black to-gray-900"
+      className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black via-gray-950 to-black relative overflow-hidden"
     >
+      {/* Background decoration */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:24px_24px]"></div>
       <div className="max-w-7xl mx-auto">
         <motion.div
           ref={ref}
@@ -64,10 +66,12 @@ export function Projects() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
-            Projets
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
+            <span className="bg-gradient-to-r from-white via-green-100 to-emerald-100 bg-clip-text text-transparent">
+              Projets
+            </span>
           </h2>
-          <p className="text-xl text-gray-300">
+          <p className="text-lg md:text-xl text-gray-300/80 font-light">
             Découvrez mes réalisations récentes
           </p>
         </motion.div>
@@ -79,10 +83,12 @@ export function Projects() {
               initial={{ opacity: 0, y: 20 }}
               animate={inView && isInitialized ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="bg-gray-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-700 hover:border-green-500 transition-all duration-300 group hover:shadow-2xl hover:shadow-green-500/10"
+              className="relative bg-gradient-to-br from-gray-900/80 via-gray-800/60 to-gray-900/80 backdrop-blur-xl rounded-2xl overflow-hidden border border-gray-700/50 hover:border-green-500/30 transition-all duration-500 group hover:shadow-2xl hover:shadow-green-500/20 hover:scale-[1.02]"
             >
+              <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-emerald-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative z-10">
               {/* Image avec overlay au hover */}
-              <div className="relative h-48 bg-gradient-to-br from-green-600/20 to-emerald-600/20 overflow-hidden">
+              <div className="relative h-56 bg-gradient-to-br from-green-600/10 via-emerald-600/10 to-green-500/10 overflow-hidden">
                 {project.image_url ? (
                   <img 
                     src={project.image_url} 
@@ -97,7 +103,7 @@ export function Projects() {
                 <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
 
-              <div className="p-6">
+              <div className="p-8">
                 {/* En-tête avec date et rôle */}
                 <div className="flex items-start justify-between mb-2">
                   <h3 className="text-xl font-semibold text-white group-hover:text-green-400 transition-colors">
@@ -161,7 +167,7 @@ export function Projects() {
                   {project.technologies.slice(0, 4).map((tech) => (
                     <span
                       key={tech}
-                      className="px-2.5 py-1 bg-green-500/10 text-green-300 rounded-full text-xs border border-green-500/20"
+                      className="px-3 py-1.5 bg-gradient-to-br from-green-500/10 to-emerald-500/10 text-green-300 rounded-lg text-xs border border-green-500/20 backdrop-blur-sm hover:border-green-400/40 hover:bg-green-500/15 transition-all duration-300"
                     >
                       {tech}
                     </span>

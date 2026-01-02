@@ -82,8 +82,10 @@ export function Skills() {
   return (
     <section
       id="skills"
-      className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-900 to-black"
+      className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black via-gray-950 to-black relative overflow-hidden"
     >
+      {/* Background decoration */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:24px_24px]"></div>
       <div className="max-w-7xl mx-auto">
         <motion.div
           ref={ref}
@@ -92,10 +94,12 @@ export function Skills() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
-            Compétences
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
+            <span className="bg-gradient-to-r from-white via-green-100 to-emerald-100 bg-clip-text text-transparent">
+              Compétences
+            </span>
           </h2>
-          <p className="text-xl text-gray-300">
+          <p className="text-lg md:text-xl text-gray-300/80 font-light">
             Technologies et outils que je maîtrise
           </p>
         </motion.div>
@@ -109,7 +113,7 @@ export function Skills() {
                 key={category.title}
                 initial={{ opacity: 1 }}
                 animate={{ opacity: 1 }}
-                className="bg-gray-800/30 backdrop-blur-sm rounded-xl border border-gray-700 overflow-hidden transition-all duration-300"
+                className="relative bg-gradient-to-br from-gray-900/80 via-gray-800/60 to-gray-900/80 backdrop-blur-xl rounded-2xl border border-gray-700/50 overflow-hidden transition-all duration-500 hover:border-green-500/30 hover:shadow-2xl hover:shadow-green-500/10 group"
               >
                 {/* En-tête cliquable */}
                 <button
@@ -153,13 +157,15 @@ export function Skills() {
                                 duration: 0.4, 
                                 delay: skillIndex * 0.05 
                               }}
-                              className="bg-gray-900/50 p-4 rounded-lg border border-gray-700/50 hover:border-gray-600/50 transition-colors"
+                              className="relative bg-gradient-to-br from-gray-900/60 to-gray-800/40 backdrop-blur-sm p-4 rounded-xl border border-gray-700/30 hover:border-green-500/30 hover:bg-gray-900/80 transition-all duration-300 group/item"
                             >
+                              <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-emerald-500/5 rounded-xl opacity-0 group-hover/item:opacity-100 transition-opacity duration-300"></div>
+                              <div className="relative z-10">
                               <div className="flex justify-between items-center mb-2">
                                 <span className="text-white text-sm font-medium">{skill.name}</span>
                                 <span className="text-gray-400 text-xs font-semibold">{skill.level}%</span>
                               </div>
-                              <div className="w-full bg-gray-700 rounded-full h-2.5 overflow-hidden">
+                              <div className="w-full bg-gray-800/50 rounded-full h-2.5 overflow-hidden">
                                 <motion.div
                                   initial={{ width: 0 }}
                                   animate={{ width: `${skill.level}%` }}
@@ -168,8 +174,9 @@ export function Skills() {
                                     delay: skillIndex * 0.05 + 0.2,
                                     ease: "easeOut"
                                   }}
-                                  className={`h-full bg-gradient-to-r ${skill.color} rounded-full shadow-lg`}
+                                  className={`h-full bg-gradient-to-r ${skill.color} rounded-full shadow-lg shadow-green-500/20`}
                                 />
+                              </div>
                               </div>
                             </motion.div>
                           ))}
