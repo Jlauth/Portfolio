@@ -54,11 +54,17 @@ export async function getProjects() {
     return [];
   }
 
+  // LOG pour déboguer : voir tous les projets récupérés
+  console.log(`[getProjects] ${data?.length || 0} projets récupérés depuis Supabase:`, data?.map(p => ({ id: p.id, title: p.title, created_at: p.created_at })));
+
   // Filtrer les enregistrements keepalive et les projets "Test"
   const filtered = filterKeepalive(data || []).filter((project) => {
     const title = project.title?.toLowerCase() || "";
     return !title.includes("test") && title !== "projet test";
   });
+  
+  // LOG pour déboguer : voir les projets après filtrage keepalive
+  console.log(`[getProjects] ${filtered.length} projets après filtrage keepalive:`, filtered.map(p => p.title));
   
   // Supprimer les doublons basés sur le titre (garder le premier)
   const seenTitles = new Set<string>();
@@ -88,6 +94,9 @@ export async function getProjects() {
     seenTitles.add(title);
     return true;
   });
+  
+  // LOG pour déboguer : voir les projets finaux
+  console.log(`[getProjects] ${uniqueProjects.length} projets finaux:`, uniqueProjects.map(p => p.title));
   
   return uniqueProjects;
 }
