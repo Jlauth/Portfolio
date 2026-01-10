@@ -139,31 +139,59 @@ export async function POST(request: Request) {
       } else {
         // Insérer le nouveau projet
         console.log(`[Sync] Insertion du projet: ${project.title}`);
+        
+        // D'abord insérer avec les champs de base uniquement
+        const baseData: any = {
+          title: project.title,
+          description: project.description,
+          technologies: project.technologies,
+          github_url: project.github_url,
+          demo_url: project.demo_url,
+          image_url: project.image_url,
+        };
+        
+        // Ajouter les champs optionnels seulement s'ils existent (pour éviter les erreurs de colonnes manquantes)
+        if (project.role !== undefined) baseData.role = project.role;
+        if (project.date !== undefined) baseData.date = project.date;
+        if (project.highlights !== undefined) baseData.highlights = project.highlights;
+        if (project.results !== undefined) baseData.results = project.results;
+        if (project.category !== undefined) baseData.category = project.category;
+        if (project.shortDescription !== undefined) baseData.shortDescription = project.shortDescription;
+        if (project.context !== undefined) baseData.context = project.context;
+        if (project.problem !== undefined) baseData.problem = project.problem;
+        if (project.interventions !== undefined) baseData.interventions = project.interventions;
+        if (project.result !== undefined) baseData.result = project.result;
+        
         const { data, error } = await supabase
           .from("projects")
-          .insert({
-            title: project.title,
-            description: project.description,
-            technologies: project.technologies,
-            github_url: project.github_url,
-            demo_url: project.demo_url,
-            image_url: project.image_url,
-            role: project.role || null,
-            date: project.date || null,
-            highlights: project.highlights || null,
-            results: project.results || null,
-            category: project.category || null,
-            shortDescription: project.shortDescription || null,
-            context: project.context || null,
-            problem: project.problem || null,
-            interventions: project.interventions || null,
-            result: project.result || null,
-          })
+          .insert(baseData)
           .select();
 
         if (error) {
           console.error(`[Sync] Erreur lors de l'insertion de ${project.title}:`, error);
-          results.push({ title: project.title, action: "insert", error: error.message });
+          // Si erreur de colonne manquante, réessayer avec seulement les champs de base
+          if (error.message.includes("column") || error.code === "42703") {
+            console.log(`[Sync] Réessai avec champs de base uniquement pour ${project.title}`);
+            const { data: retryData, error: retryError } = await supabase
+              .from("projects")
+              .insert({
+                title: project.title,
+                description: project.description,
+                technologies: project.technologies,
+                github_url: project.github_url,
+                demo_url: project.demo_url,
+                image_url: project.image_url,
+              })
+              .select();
+            
+            if (retryError) {
+              results.push({ title: project.title, action: "insert", error: retryError.message });
+            } else {
+              results.push({ title: project.title, action: "inserted", success: true });
+            }
+          } else {
+            results.push({ title: project.title, action: "insert", error: error.message });
+          }
         } else {
           console.log(`[Sync] Projet ${project.title} inséré avec succès`);
           results.push({ title: project.title, action: "inserted", success: true });
