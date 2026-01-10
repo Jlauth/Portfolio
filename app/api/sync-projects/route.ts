@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
 import { defaultProjects } from "@/data/projects";
-import { filterKeepalive, isKeepaliveProject } from "@/lib/keepalive";
 
 export async function POST(request: Request) {
   try {
@@ -18,10 +17,10 @@ export async function POST(request: Request) {
       .from("projects")
       .select("id, title");
 
-    // Filtrer les keepalive et les projets "Test"
-    const filteredProjects = filterKeepalive(existingProjects || []).filter((p) => {
+    // Filtrer les projets "Test"
+    const filteredProjects = (existingProjects || []).filter((p) => {
       const title = p.title?.toLowerCase() || "";
-      return !title.includes("test") && title !== "projet test";
+      return !title.includes("test") && title !== "projet test" && !title.startsWith("__keepalive__");
     });
     
     // Supprimer les doublons : garder seulement le premier projet pour chaque titre unique
@@ -90,16 +89,26 @@ export async function POST(request: Request) {
       }
     }
 
+    // Supprimer tous les enregistrements keepalive de Supabase
+    const { error: deleteKeepaliveError } = await supabase
+      .from("projects")
+      .delete()
+      .like("title", "__keepalive__%");
+    
+    if (deleteKeepaliveError && deleteKeepaliveError.code !== "PGRST116") {
+      console.warn("Erreur lors de la suppression des keepalive:", deleteKeepaliveError);
+    }
+
     // RÉACTUALISER la liste des projets existants APRÈS le nettoyage
     const { data: refreshedProjects } = await supabase
       .from("projects")
       .select("id, title");
     
     const refreshedTitles = new Set(
-      filterKeepalive(refreshedProjects || [])
+      (refreshedProjects || [])
         .filter((p) => {
           const title = p.title?.toLowerCase() || "";
-          return !title.includes("test") && title !== "projet test";
+          return !title.includes("test") && title !== "projet test" && !title.startsWith("__keepalive__");
         })
         .map((p) => p.title)
     );
@@ -228,10 +237,10 @@ export async function GET() {
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
-    // Filtrer les enregistrements keepalive et les projets "Test"
-    const filteredProjects = filterKeepalive(data || []).filter((p) => {
+    // Filtrer les projets "Test" et keepalive
+    const filteredProjects = (data || []).filter((p) => {
       const title = p.title?.toLowerCase() || "";
-      return !title.includes("test") && title !== "projet test";
+      return !title.includes("test") && title !== "projet test" && !title.startsWith("__keepalive__");
     });
 
     return NextResponse.json({

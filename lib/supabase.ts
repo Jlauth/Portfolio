@@ -1,5 +1,4 @@
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
-import { filterKeepalive } from "./keepalive";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
@@ -57,10 +56,10 @@ export async function getProjects() {
   // LOG pour déboguer : voir tous les projets récupérés
   console.log(`[getProjects] ${data?.length || 0} projets récupérés depuis Supabase:`, data?.map(p => ({ id: p.id, title: p.title, created_at: p.created_at })));
 
-  // Filtrer les enregistrements keepalive et les projets "Test"
-  const filtered = filterKeepalive(data || []).filter((project) => {
+  // Filtrer les projets "Test" et keepalive
+  const filtered = (data || []).filter((project) => {
     const title = project.title?.toLowerCase() || "";
-    return !title.includes("test") && title !== "projet test";
+    return !title.includes("test") && title !== "projet test" && !title.startsWith("__keepalive__");
   });
   
   // LOG pour déboguer : voir les projets après filtrage keepalive
