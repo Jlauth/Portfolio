@@ -54,7 +54,12 @@ export async function getProjects() {
     return [];
   }
 
-  // Filtrer les enregistrements keepalive pour qu'ils ne soient jamais visibles
-  return filterKeepalive(data || []);
+  // Filtrer les enregistrements keepalive et les projets "Test"
+  const filtered = filterKeepalive(data || []);
+  // Exclure également les projets "Test" ou contenant "Test" dans le titre
+  return filtered.filter((project) => {
+    const title = project.title?.toLowerCase() || "";
+    return !title.includes("test") && title !== "projet test";
+  });
 }
 

@@ -33,12 +33,18 @@ export function Projects() {
         // Charger les projets depuis Supabase
         const supabaseProjects = await getProjects();
         if (supabaseProjects && supabaseProjects.length > 0) {
+          // Filtrer les projets "Test" au cas où
+          const filteredProjects = supabaseProjects.filter((project) => {
+            const title = project.title?.toLowerCase() || "";
+            return !title.includes("test") && title !== "projet test";
+          });
+          
           // Ne mettre à jour que si les projets sont différents pour éviter le clignotement
           setProjects((prevProjects) => {
             // Comparer les IDs pour éviter les mises à jour inutiles
             const prevIds = prevProjects.map(p => p.id).sort().join(',');
-            const newIds = supabaseProjects.map(p => p.id).sort().join(',');
-            return prevIds === newIds ? prevProjects : supabaseProjects;
+            const newIds = filteredProjects.map(p => p.id).sort().join(',');
+            return prevIds === newIds ? prevProjects : filteredProjects;
           });
         }
         // Ne pas changer si Supabase est vide, garder les projets par défaut

@@ -18,8 +18,22 @@ export async function POST(request: Request) {
       .from("projects")
       .select("id, title");
 
-    // Filtrer les keepalive et créer un Set des titres existants
-    const filteredProjects = filterKeepalive(existingProjects || []);
+    // Filtrer les keepalive et les projets "Test"
+    const filteredProjects = filterKeepalive(existingProjects || []).filter((p) => {
+      const title = p.title?.toLowerCase() || "";
+      return !title.includes("test") && title !== "projet test";
+    });
+    
+    // Supprimer le projet "Test" s'il existe dans Supabase
+    const { error: deleteError } = await supabase
+      .from("projects")
+      .delete()
+      .or("title.ilike.%test%,title.eq.Projet Test");
+    
+    if (deleteError && deleteError.code !== "PGRST116") {
+      console.warn("Erreur lors de la suppression du projet Test:", deleteError);
+    }
+    
     const existingTitles = new Set(
       filteredProjects.map((p) => p.title)
     );
@@ -97,8 +111,11 @@ export async function GET() {
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
-    // Filtrer les enregistrements keepalive pour qu'ils ne soient jamais visibles
-    const filteredProjects = filterKeepalive(data || []);
+    // Filtrer les enregistrements keepalive et les projets "Test"
+    const filteredProjects = filterKeepalive(data || []).filter((p) => {
+      const title = p.title?.toLowerCase() || "";
+      return !title.includes("test") && title !== "projet test";
+    });
 
     return NextResponse.json({
       projects: filteredProjects,
