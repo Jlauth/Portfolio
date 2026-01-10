@@ -110,5 +110,35 @@ export const defaultProjects: DefaultProject[] = [
     ],
     result: "Site plus rapide et stable, base technique saine, expérience utilisateur améliorée avec module 3D innovant, meilleure gestion du back-office."
   },
+  {
+    id: "4",
+    title: "Génération d'attestations fiscales - Arkadia PC",
+    description:
+      "Application desktop Java interne permettant la génération automatique d'attestations fiscales personnalisées pour les clients. Outil métier utilisé en production chaque année par l'entreprise.",
+    shortDescription: "Application desktop Java pour génération automatique d'attestations fiscales personnalisées.",
+    image_url: null,
+    technologies: ["Java", "Architecture MVC", "Apache POI", "Interface graphique", "Génération de documents"],
+    github_url: null,
+    demo_url: null,
+    role: "Développement application métier",
+    date: "2024",
+    highlights: [
+      "Application desktop Java",
+      "Génération automatique de documents",
+      "Intégration logo et signature",
+      "Outil utilisé en production"
+    ],
+    category: "other",
+    context: "Arkadia PC devait produire chaque année des attestations fiscales personnalisées pour ses clients, un processus jusqu'alors chronophage et source d'erreurs lorsqu'il était réalisé manuellement.",
+    problem: "Processus manuel chronophage, risque d'erreurs humaines dans la saisie, génération répétitive chaque année, manque de fiabilité dans la production des documents.",
+    interventions: [
+      "Développement application desktop Java avec architecture MVC",
+      "Interface graphique pour saisie des données par le client",
+      "Génération automatique d'attestations personnalisées (Apache POI)",
+      "Intégration automatique du logo, signature et informations légales",
+      "Production d'un document par client et par année fiscale"
+    ],
+    result: "Gain de temps significatif dans la génération des attestations, réduction des erreurs humaines, processus simplifié pour l'équipe, adoption en production et utilisation chaque année par l'entreprise."
+  },
 ];
 
