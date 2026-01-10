@@ -54,7 +54,7 @@ export function Projects() {
   return (
     <section
       id="projects"
-      className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black via-gray-950 to-black relative overflow-hidden"
+      className="py-24 px-4 sm:px-6 lg:px-8 bg-[#0b0f14] relative overflow-hidden"
     >
       {/* Background decoration */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:24px_24px]"></div>
@@ -66,12 +66,12 @@ export function Projects() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
-            <span className="bg-gradient-to-r from-white via-green-100 to-emerald-100 bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold mb-6 tracking-tight">
+            <span className="bg-gradient-to-r from-white via-gray-200 to-gray-300 bg-clip-text text-transparent">
               Projets
             </span>
           </h2>
-          <p className="text-lg md:text-xl text-gray-300/80 font-light">
+          <p className="text-lg md:text-xl text-[#9ca3af] font-light">
             Découvrez mes réalisations récentes
           </p>
         </motion.div>
@@ -83,12 +83,12 @@ export function Projects() {
               initial={{ opacity: 0, y: 20 }}
               animate={inView && isInitialized ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="relative bg-gradient-to-br from-gray-900/80 via-gray-800/60 to-gray-900/80 backdrop-blur-xl rounded-2xl overflow-hidden border border-gray-700/50 hover:border-green-500/30 transition-all duration-500 group hover:shadow-2xl hover:shadow-green-500/20 hover:scale-[1.02]"
+              className="relative bg-gradient-to-b from-[rgba(255,255,255,0.04)] to-[rgba(255,255,255,0.01)] backdrop-blur-[6px] rounded-[14px] overflow-hidden border border-[rgba(255,255,255,0.06)] hover:border-[#34d399]/20 transition-all duration-500 group hover:shadow-2xl hover:shadow-[#34d399]/5 hover:scale-[1.02]"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-emerald-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="absolute inset-0 bg-[#34d399]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <div className="relative z-10">
-              {/* Image avec overlay au hover */}
-              <div className="relative h-56 bg-gradient-to-br from-green-600/10 via-emerald-600/10 to-green-500/10 overflow-hidden">
+                {/* Image avec overlay au hover */}
+              <div className="relative h-56 bg-[#111827]/30 overflow-hidden">
                 {project.image_url ? (
                   <img 
                     src={project.image_url} 
@@ -97,7 +97,7 @@ export function Projects() {
                   />
                 ) : (
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <Code size={48} className="text-green-400/30" />
+                    <Code size={48} className="text-[#34d399]/20" />
                   </div>
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -106,7 +106,7 @@ export function Projects() {
               <div className="p-8">
                 {/* En-tête avec date et rôle */}
                 <div className="flex items-start justify-between mb-2">
-                  <h3 className="text-xl font-semibold text-white group-hover:text-green-400 transition-colors">
+                  <h3 className="text-xl font-semibold text-white group-hover:text-[#34d399] transition-colors">
                     {project.title}
                   </h3>
                   {project.date && (
@@ -143,7 +143,7 @@ export function Projects() {
                     <ul className="space-y-1">
                       {project.interventions.map((intervention, i) => (
                         <li key={i} className="text-xs text-gray-400 flex items-start gap-2">
-                          <span className="text-green-400 mt-1">•</span>
+                          <span className="text-[#34d399] mt-1">•</span>
                           <span>{intervention}</span>
                         </li>
                       ))}
@@ -155,7 +155,7 @@ export function Projects() {
                 {(project.result || project.results) && (
                   <div className="mb-4">
                     <h4 className="text-xs font-semibold text-gray-400 mb-1">Résultat</h4>
-                    <div className="flex items-start gap-2 text-sm text-green-400">
+                    <div className="flex items-start gap-2 text-sm text-[#34d399]">
                       <TrendingUp size={16} className="mt-0.5 flex-shrink-0" />
                       <span>{project.result || project.results}</span>
                     </div>
@@ -167,7 +167,7 @@ export function Projects() {
                   {project.technologies.slice(0, 4).map((tech) => (
                     <span
                       key={tech}
-                      className="px-3 py-1.5 bg-gradient-to-br from-green-500/10 to-emerald-500/10 text-green-300 rounded-lg text-xs border border-green-500/20 backdrop-blur-sm hover:border-green-400/40 hover:bg-green-500/15 transition-all duration-300"
+                      className="px-3 py-1.5 bg-[#34d399]/10 text-[#34d399] rounded-lg text-xs border border-[#34d399]/20 backdrop-blur-sm hover:border-[#34d399]/30 hover:bg-[#34d399]/15 transition-all duration-300"
                     >
                       {tech}
                     </span>
@@ -186,7 +186,7 @@ export function Projects() {
                       href={project.github_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 text-gray-400 hover:text-green-400 transition-colors text-sm"
+                      className="flex items-center gap-2 text-gray-400 hover:text-[#34d399] transition-colors text-sm"
                     >
                       <Github size={18} />
                       <span>Code</span>
@@ -197,7 +197,7 @@ export function Projects() {
                       href={project.demo_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 text-gray-400 hover:text-green-400 transition-colors text-sm"
+                      className="flex items-center gap-2 text-gray-400 hover:text-[#34d399] transition-colors text-sm"
                     >
                       <ExternalLink size={18} />
                       <span>Voir le projet</span>
@@ -207,6 +207,7 @@ export function Projects() {
                     <span className="text-xs text-gray-500">Projet client (confidentiel)</span>
                   )}
                 </div>
+              </div>
               </div>
             </motion.div>
           ))}

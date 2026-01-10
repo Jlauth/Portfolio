@@ -8,13 +8,13 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-black via-gray-950 to-black"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden bg-[#0b0f14]"
     >
       {/* Animated background premium */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-green-500/30 to-emerald-500/20 rounded-full mix-blend-soft-light filter blur-3xl animate-blob"></div>
-        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-gradient-to-br from-emerald-500/30 to-green-400/20 rounded-full mix-blend-soft-light filter blur-3xl animate-blob animation-delay-2000"></div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-br from-green-500/10 to-emerald-500/5 rounded-full mix-blend-soft-light filter blur-3xl animate-blob animation-delay-4000"></div>
+        <div className="absolute -top-40 -right-40 w-96 h-96 bg-[#34d399]/10 rounded-full mix-blend-soft-light filter blur-3xl animate-blob"></div>
+        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-[#10b981]/10 rounded-full mix-blend-soft-light filter blur-3xl animate-blob animation-delay-2000"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#34d399]/5 rounded-full mix-blend-soft-light filter blur-3xl animate-blob animation-delay-4000"></div>
       </div>
       
       {/* Grid pattern overlay */}
@@ -30,13 +30,13 @@ export function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 tracking-tight"
+            className="text-5xl md:text-7xl lg:text-8xl font-semibold mb-8 tracking-tight"
           >
-            <span className="bg-gradient-to-r from-white via-green-100 to-emerald-100 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(34,197,94,0.3)]">
+            <span className="bg-gradient-to-r from-white via-gray-200 to-gray-300 bg-clip-text text-transparent">
               Développeur web
             </span>
             <br />
-            <span className="bg-gradient-to-r from-green-400 via-emerald-400 to-green-300 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#34d399] via-[#10b981] to-[#34d399] bg-clip-text text-transparent">
               & e-commerce
             </span>
           </motion.h1>
@@ -47,7 +47,7 @@ export function Hero() {
             transition={{ duration: 1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
             className="text-lg md:text-xl lg:text-2xl text-gray-300/90 mb-12 max-w-3xl mx-auto leading-relaxed font-light"
           >
-            Sites vitrines WordPress et boutiques e-commerce PrestaShop, avec un focus sur la <span className="text-green-400 font-medium">performance</span>, la <span className="text-emerald-400 font-medium">stabilité</span> et le <span className="text-green-300 font-medium">référencement</span>.
+            Sites vitrines WordPress et boutiques e-commerce PrestaShop, avec un focus sur la <span className="text-[#34d399] font-medium">performance</span>, la <span className="text-[#10b981] font-medium">stabilité</span> et le <span className="text-[#34d399] font-medium">référencement</span>.
           </motion.p>
 
           <motion.div
@@ -58,14 +58,13 @@ export function Hero() {
           >
             <Link
               href="#projects"
-              className="group relative px-8 py-4 bg-gradient-to-r from-green-600 via-emerald-600 to-green-600 text-white rounded-xl font-semibold overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-green-500/30 hover:scale-[1.02] focus-visible:ring-2 focus-visible:ring-green-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+              className="group relative px-8 py-4 bg-gradient-to-b from-[#34d399] to-[#10b981] text-[#022c22] rounded-xl font-semibold overflow-hidden transition-all duration-500 hover:shadow-[0_10px_30px_rgba(16,185,129,0.25)] hover:scale-[1.02] focus-visible:ring-2 focus-visible:ring-[#34d399]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0b0f14]"
             >
               <span className="relative z-10">Voir mes projets</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-green-500 via-emerald-500 to-green-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             </Link>
             <Link
               href="#contact"
-              className="group relative px-8 py-4 border border-white/20 text-white rounded-xl font-semibold backdrop-blur-sm bg-white/5 hover:bg-white/10 hover:border-white/30 transition-all duration-500 hover:scale-[1.02] focus-visible:ring-2 focus-visible:ring-green-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+              className="px-8 py-4 border border-white/6 text-gray-300 rounded-xl font-normal backdrop-blur-sm bg-white/[0.03] hover:bg-white/[0.05] hover:border-white/10 hover:text-white transition-all duration-500 focus-visible:ring-2 focus-visible:ring-[#34d399]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0b0f14]"
             >
               Discuter de votre projet
             </Link>
@@ -84,7 +83,7 @@ export function Hero() {
               className="group relative p-3 text-gray-400 hover:text-white transition-all duration-300 hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-lg hover:bg-white/5"
             >
               <Github size={24} className="relative z-10" />
-              <div className="absolute inset-0 bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
+              <div className="absolute inset-0 bg-[#34d399]/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
             </Link>
             <Link
               href="https://linkedin.com"
@@ -93,14 +92,14 @@ export function Hero() {
               className="group relative p-3 text-gray-400 hover:text-white transition-all duration-300 hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-lg hover:bg-white/5"
             >
               <Linkedin size={24} className="relative z-10" />
-              <div className="absolute inset-0 bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
+              <div className="absolute inset-0 bg-[#34d399]/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
             </Link>
             <Link
               href="mailto:contact@example.com"
               className="group relative p-3 text-gray-400 hover:text-white transition-all duration-300 hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-lg hover:bg-white/5"
             >
               <Mail size={24} className="relative z-10" />
-              <div className="absolute inset-0 bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
+              <div className="absolute inset-0 bg-[#34d399]/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
             </Link>
           </motion.div>
         </motion.div>
