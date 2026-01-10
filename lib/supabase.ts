@@ -58,12 +58,21 @@ export async function getProjects() {
 
   // Filtrer les projets "Test" et keepalive
   const filtered = (data || []).filter((project) => {
-    const title = project.title?.toLowerCase() || "";
-    return !title.includes("test") && title !== "projet test" && !title.startsWith("__keepalive__");
+    const title = project.title || "";
+    const titleLower = title.toLowerCase();
+    const isTest = titleLower.includes("test") || titleLower === "projet test";
+    const isKeepalive = title.startsWith("__keepalive__");
+    const shouldKeep = !isTest && !isKeepalive;
+    
+    if (!shouldKeep) {
+      console.log(`[getProjects] Projet filtré: "${title}" (test: ${isTest}, keepalive: ${isKeepalive})`);
+    }
+    
+    return shouldKeep;
   });
   
-  // LOG pour déboguer : voir les projets après filtrage keepalive
-  console.log(`[getProjects] ${filtered.length} projets après filtrage keepalive:`, filtered.map(p => p.title));
+  // LOG pour déboguer : voir les projets après filtrage
+  console.log(`[getProjects] ${filtered.length} projets après filtrage:`, filtered.map(p => p.title));
   
   // Supprimer les doublons basés sur le titre (garder le premier)
   const seenTitles = new Set<string>();
