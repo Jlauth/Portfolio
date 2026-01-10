@@ -39,12 +39,23 @@ export function Projects() {
             return !title.includes("test") && title !== "projet test";
           });
           
+          // Supprimer les doublons basés sur le titre (garder le premier)
+          const seenTitles = new Set<string>();
+          const uniqueProjects = filteredProjects.filter((project) => {
+            const title = project.title;
+            if (seenTitles.has(title)) {
+              return false; // Doublon, on l'exclut
+            }
+            seenTitles.add(title);
+            return true;
+          });
+          
           // Ne mettre à jour que si les projets sont différents pour éviter le clignotement
           setProjects((prevProjects) => {
             // Comparer les IDs pour éviter les mises à jour inutiles
             const prevIds = prevProjects.map(p => p.id).sort().join(',');
-            const newIds = filteredProjects.map(p => p.id).sort().join(',');
-            return prevIds === newIds ? prevProjects : filteredProjects;
+            const newIds = uniqueProjects.map(p => p.id).sort().join(',');
+            return prevIds === newIds ? prevProjects : uniqueProjects;
           });
         }
         // Ne pas changer si Supabase est vide, garder les projets par défaut

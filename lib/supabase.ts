@@ -55,11 +55,22 @@ export async function getProjects() {
   }
 
   // Filtrer les enregistrements keepalive et les projets "Test"
-  const filtered = filterKeepalive(data || []);
-  // Exclure également les projets "Test" ou contenant "Test" dans le titre
-  return filtered.filter((project) => {
+  const filtered = filterKeepalive(data || []).filter((project) => {
     const title = project.title?.toLowerCase() || "";
     return !title.includes("test") && title !== "projet test";
   });
+  
+  // Supprimer les doublons basés sur le titre (garder le premier)
+  const seenTitles = new Set<string>();
+  const uniqueProjects = filtered.filter((project) => {
+    const title = project.title;
+    if (seenTitles.has(title)) {
+      return false; // Doublon, on l'exclut
+    }
+    seenTitles.add(title);
+    return true;
+  });
+  
+  return uniqueProjects;
 }
 

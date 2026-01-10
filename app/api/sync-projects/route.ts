@@ -24,6 +24,33 @@ export async function POST(request: Request) {
       return !title.includes("test") && title !== "projet test";
     });
     
+    // Supprimer les doublons : garder seulement le premier projet pour chaque titre unique
+    const titleToId = new Map<string, string>();
+    const duplicateIds: string[] = [];
+    
+    for (const project of filteredProjects) {
+      const title = project.title;
+      if (titleToId.has(title)) {
+        // C'est un doublon, on le marque pour suppression
+        duplicateIds.push(project.id);
+      } else {
+        // Premier projet avec ce titre, on le garde
+        titleToId.set(title, project.id);
+      }
+    }
+    
+    // Supprimer les doublons
+    if (duplicateIds.length > 0) {
+      const { error: deleteDuplicatesError } = await supabase
+        .from("projects")
+        .delete()
+        .in("id", duplicateIds);
+      
+      if (deleteDuplicatesError && deleteDuplicatesError.code !== "PGRST116") {
+        console.warn("Erreur lors de la suppression des doublons:", deleteDuplicatesError);
+      }
+    }
+    
     // Supprimer le projet "Test" s'il existe dans Supabase
     const { error: deleteError } = await supabase
       .from("projects")
@@ -35,7 +62,7 @@ export async function POST(request: Request) {
     }
     
     const existingTitles = new Set(
-      filteredProjects.map((p) => p.title)
+      Array.from(titleToId.keys())
     );
 
     // Synchroniser les projets
