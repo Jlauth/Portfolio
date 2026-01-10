@@ -51,6 +51,16 @@ export async function POST(request: Request) {
             github_url: project.github_url,
             demo_url: project.demo_url,
             image_url: project.image_url,
+            role: project.role || null,
+            date: project.date || null,
+            highlights: project.highlights || null,
+            results: project.results || null,
+            category: project.category || null,
+            shortDescription: project.shortDescription || null,
+            context: project.context || null,
+            problem: project.problem || null,
+            interventions: project.interventions || null,
+            result: project.result || null,
           })
           .eq("title", project.title)
           .select();
@@ -71,6 +81,16 @@ export async function POST(request: Request) {
             github_url: project.github_url,
             demo_url: project.demo_url,
             image_url: project.image_url,
+            role: project.role || null,
+            date: project.date || null,
+            highlights: project.highlights || null,
+            results: project.results || null,
+            category: project.category || null,
+            shortDescription: project.shortDescription || null,
+            context: project.context || null,
+            problem: project.problem || null,
+            interventions: project.interventions || null,
+            result: project.result || null,
           })
           .select();
 
