@@ -24,17 +24,6 @@ export async function POST(request: Request) {
       return !title.includes("test") && title !== "projet test";
     });
     
-    // Supprimer les anciens projets Omniflamme qui ne correspondent pas exactement
-    const { error: deleteOldOmniflammeError } = await supabase
-      .from("projects")
-      .delete()
-      .like("title", "Omniflamme%")
-      .neq("title", "Omniflamme 9.0.1 - Mise à jour E-commerce");
-    
-    if (deleteOldOmniflammeError && deleteOldOmniflammeError.code !== "PGRST116") {
-      console.warn("Erreur lors de la suppression des anciens Omniflamme:", deleteOldOmniflammeError);
-    }
-    
     // Supprimer les doublons : garder seulement le premier projet pour chaque titre unique
     const titleToId = new Map<string, string>();
     const duplicateIds: string[] = [];
@@ -149,6 +138,7 @@ export async function POST(request: Request) {
         }
       } else {
         // Insérer le nouveau projet
+        console.log(`[Sync] Insertion du projet: ${project.title}`);
         const { data, error } = await supabase
           .from("projects")
           .insert({
@@ -172,8 +162,10 @@ export async function POST(request: Request) {
           .select();
 
         if (error) {
+          console.error(`[Sync] Erreur lors de l'insertion de ${project.title}:`, error);
           results.push({ title: project.title, action: "insert", error: error.message });
         } else {
+          console.log(`[Sync] Projet ${project.title} inséré avec succès`);
           results.push({ title: project.title, action: "inserted", success: true });
         }
       }
