@@ -59,8 +59,9 @@ export async function getProjects() {
   // Filtrer les projets "Test" et keepalive
   const filtered = (data || []).filter((project) => {
     const title = project.title || "";
-    const titleLower = title.toLowerCase();
-    const isTest = titleLower.includes("test") || titleLower === "projet test";
+    const titleLower = project.title || "";
+    // Vérifier si "test" est un mot complet (pas dans "attestations", "contest", etc.)
+    const isTest = /\btest\b/i.test(title) || titleLower === "projet test";
     const isKeepalive = title.startsWith("__keepalive__");
     const shouldKeep = !isTest && !isKeepalive;
     

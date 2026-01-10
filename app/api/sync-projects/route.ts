@@ -19,8 +19,9 @@ export async function POST(request: Request) {
 
     // Filtrer les projets "Test"
     const filteredProjects = (existingProjects || []).filter((p) => {
-      const title = p.title?.toLowerCase() || "";
-      return !title.includes("test") && title !== "projet test" && !title.startsWith("__keepalive__");
+      const title = p.title || "";
+      const isTest = /\btest\b/i.test(title) || title.toLowerCase() === "projet test";
+      return !isTest && !title.startsWith("__keepalive__");
     });
     
     // Supprimer les doublons : garder seulement le premier projet pour chaque titre unique
@@ -69,9 +70,9 @@ export async function POST(request: Request) {
     if (allProjects) {
       const projectsToDelete = allProjects
         .filter(p => {
-          const title = p.title?.toLowerCase() || "";
+          const title = p.title || "";
           const isKeepalive = p.title?.startsWith("__keepalive__");
-          const isTest = title.includes("test") || title === "projet test";
+          const isTest = /\btest\b/i.test(title) || title.toLowerCase() === "projet test";
           const isValid = validTitles.has(p.title);
           return !isKeepalive && !isTest && !isValid;
         })
@@ -108,7 +109,8 @@ export async function POST(request: Request) {
       (refreshedProjects || [])
         .filter((p) => {
           const title = p.title?.toLowerCase() || "";
-          return !title.includes("test") && title !== "projet test" && !title.startsWith("__keepalive__");
+          const isTest = /\btest\b/i.test(title) || title === "projet test";
+          return !isTest && !title.startsWith("__keepalive__");
         })
         .map((p) => p.title)
     );
@@ -238,10 +240,11 @@ export async function GET() {
     }
 
     // Filtrer les projets "Test" et keepalive
-    const filteredProjects = (data || []).filter((p) => {
-      const title = p.title?.toLowerCase() || "";
-      return !title.includes("test") && title !== "projet test" && !title.startsWith("__keepalive__");
-    });
+    const filteredProjects = (data || [])        .filter((p) => {
+          const title = p.title || "";
+          const isTest = /\btest\b/i.test(title) || title.toLowerCase() === "projet test";
+          return !isTest && !title.startsWith("__keepalive__");
+        });
 
     return NextResponse.json({
       projects: filteredProjects,

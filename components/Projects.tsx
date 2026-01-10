@@ -35,8 +35,9 @@ export function Projects() {
         if (supabaseProjects && supabaseProjects.length > 0) {
           // Filtrer les projets "Test" au cas où
           const filteredProjects = supabaseProjects.filter((project) => {
-            const title = project.title?.toLowerCase() || "";
-            return !title.includes("test") && title !== "projet test";
+            const title = project.title || "";
+            const isTest = /\btest\b/i.test(title) || title.toLowerCase() === "projet test";
+            return !isTest;
           });
           
           // Supprimer les doublons basés sur le titre (garder le premier)
