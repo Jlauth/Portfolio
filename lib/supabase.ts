@@ -56,20 +56,11 @@ export async function getProjects() {
   // LOG pour déboguer : voir tous les projets récupérés
   console.log(`[getProjects] ${data?.length || 0} projets récupérés depuis Supabase:`, data?.map(p => ({ id: p.id, title: p.title, created_at: p.created_at })));
 
-  // Filtrer les projets "Test" et keepalive
+  // Filtrer uniquement les keepalive (les projets "Test" n'existent plus)
   const filtered = (data || []).filter((project) => {
     const title = project.title || "";
-    const titleLower = project.title || "";
-    // Vérifier si "test" est un mot complet (pas dans "attestations", "contest", etc.)
-    const isTest = /\btest\b/i.test(title) || titleLower === "projet test";
     const isKeepalive = title.startsWith("__keepalive__");
-    const shouldKeep = !isTest && !isKeepalive;
-    
-    if (!shouldKeep) {
-      console.log(`[getProjects] Projet filtré: "${title}" (test: ${isTest}, keepalive: ${isKeepalive})`);
-    }
-    
-    return shouldKeep;
+    return !isKeepalive;
   });
   
   // LOG pour déboguer : voir les projets après filtrage

@@ -17,11 +17,10 @@ export async function POST(request: Request) {
       .from("projects")
       .select("id, title");
 
-    // Filtrer les projets "Test"
+    // Filtrer uniquement les keepalive
     const filteredProjects = (existingProjects || []).filter((p) => {
       const title = p.title || "";
-      const isTest = /\btest\b/i.test(title) || title.toLowerCase() === "projet test";
-      return !isTest && !title.startsWith("__keepalive__");
+      return !title.startsWith("__keepalive__");
     });
     
     // Supprimer les doublons : garder seulement le premier projet pour chaque titre unique
@@ -72,9 +71,8 @@ export async function POST(request: Request) {
         .filter(p => {
           const title = p.title || "";
           const isKeepalive = p.title?.startsWith("__keepalive__");
-          const isTest = /\btest\b/i.test(title) || title.toLowerCase() === "projet test";
           const isValid = validTitles.has(p.title);
-          return !isKeepalive && !isTest && !isValid;
+          return !isKeepalive && !isValid;
         })
         .map(p => p.id);
       
@@ -242,8 +240,7 @@ export async function GET() {
     // Filtrer les projets "Test" et keepalive
     const filteredProjects = (data || [])        .filter((p) => {
           const title = p.title || "";
-          const isTest = /\btest\b/i.test(title) || title.toLowerCase() === "projet test";
-          return !isTest && !title.startsWith("__keepalive__");
+          return !title.startsWith("__keepalive__");
         });
 
     return NextResponse.json({
