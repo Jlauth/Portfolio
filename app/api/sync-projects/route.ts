@@ -72,10 +72,6 @@ export async function POST(request: Request) {
       console.warn("Erreur lors de la suppression du projet Test:", deleteError);
     }
     
-    const existingTitles = new Set(
-      Array.from(titleToId.keys())
-    );
-
     // AVANT la synchronisation, supprimer tous les projets qui ne sont plus dans defaultProjects
     const validTitles = new Set(defaultProjects.map(p => p.title));
     const { data: allProjects } = await supabase
@@ -105,10 +101,24 @@ export async function POST(request: Request) {
       }
     }
 
+    // RÉACTUALISER la liste des projets existants APRÈS le nettoyage
+    const { data: refreshedProjects } = await supabase
+      .from("projects")
+      .select("id, title");
+    
+    const refreshedTitles = new Set(
+      filterKeepalive(refreshedProjects || [])
+        .filter((p) => {
+          const title = p.title?.toLowerCase() || "";
+          return !title.includes("test") && title !== "projet test";
+        })
+        .map((p) => p.title)
+    );
+
     // Synchroniser les projets
     const results = [];
     for (const project of defaultProjects) {
-      if (existingTitles.has(project.title)) {
+      if (refreshedTitles.has(project.title)) {
         // Mettre à jour le projet existant
         const { data, error } = await supabase
           .from("projects")
