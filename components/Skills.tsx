@@ -63,17 +63,19 @@ const skillCategories: SkillCategory[] = [
 
 export function Skills() {
   const [ref, inView] = useInView({
-    triggerOnce: false,
-    threshold: 0.1,
+    triggerOnce: true,
+    threshold: 0.2,
+    rootMargin: "-50px 0px",
   });
   const [openCategory, setOpenCategory] = useState<string | null>(null);
+  const [hasAnimated, setHasAnimated] = useState(false);
 
-  // Fermer toutes les catégories quand on sort de la section
+  // Marquer l'animation comme terminée une fois que la section est visible
   useEffect(() => {
-    if (!inView) {
-      setOpenCategory(null);
+    if (inView && !hasAnimated) {
+      setHasAnimated(true);
     }
-  }, [inView]);
+  }, [inView, hasAnimated]);
 
   const toggleCategory = (title: string) => {
     setOpenCategory(openCategory === title ? null : title);
@@ -90,8 +92,8 @@ export function Skills() {
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          animate={hasAnimated ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold mb-6 tracking-tight">
@@ -137,13 +139,16 @@ export function Skills() {
                 </button>
 
                 {/* Contenu dépliable */}
-                <AnimatePresence>
+                <AnimatePresence mode="wait">
                   {isOpen && (
                     <motion.div
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      transition={{ 
+                        duration: 0.3, 
+                        ease: [0.22, 1, 0.36, 1]
+                      }}
                       className="overflow-hidden"
                     >
                       <div className="px-6 pb-6 pt-2">

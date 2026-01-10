@@ -20,66 +20,81 @@ export function Projects() {
     threshold: 0.1,
   });
 
-  const [projects, setProjects] = useState<Project[]>(defaultProjects);
-  const [isInitialized, setIsInitialized] = useState(true);
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasAnimated, setHasAnimated] = useState(false);
 
   useEffect(() => {
-    // Synchroniser les projets du code avec Supabase au premier chargement
+    let isMounted = true;
+
     const syncAndLoadProjects = async () => {
       try {
+        setIsLoading(true);
+        
         // Synchroniser les projets du code avec Supabase
         await fetch("/api/sync-projects", { method: "POST" });
         
         // Charger les projets depuis Supabase
         const supabaseProjects = await getProjects();
+        
+        if (!isMounted) return;
+
         if (supabaseProjects && supabaseProjects.length > 0) {
-          // Pas de filtre nécessaire, les projets sont déjà filtrés par getProjects()
-          const filteredProjects = supabaseProjects;
-          
           // Supprimer les doublons basés sur le titre (garder le premier)
           const seenTitles = new Set<string>();
-          const uniqueProjects = filteredProjects.filter((project) => {
+          const uniqueProjects = supabaseProjects.filter((project) => {
             const title = project.title;
             const normalizedTitle = title.toLowerCase().trim();
             
             // Détecter les doublons Omniflamme (avec ou sans version)
             if (normalizedTitle.includes("omniflamme")) {
               if (seenTitles.has("omniflamme")) {
-                return false; // Doublon, on l'exclut
+                return false;
               }
-              // Garder seulement "Omniflamme 9.0.1 - Mise à jour E-commerce"
               if (title === "Omniflamme 9.0.1 - Mise à jour E-commerce") {
                 seenTitles.add("omniflamme");
                 seenTitles.add(title);
                 return true;
               }
-              // Exclure les autres variantes d'Omniflamme
               return false;
             }
             
             if (seenTitles.has(title)) {
-              return false; // Doublon, on l'exclut
+              return false;
             }
             seenTitles.add(title);
             return true;
           });
           
-          // TOUJOURS mettre à jour avec les projets de Supabase
-          console.log(`[Projects] Chargement de ${uniqueProjects.length} projets depuis Supabase:`, uniqueProjects.map(p => p.title));
           setProjects(uniqueProjects);
-          setIsInitialized(true);
         } else {
-          // Si Supabase est vide ou erreur, garder les projets par défaut
-          console.log("[Projects] Aucun projet dans Supabase, utilisation des projets par défaut");
+          setProjects(defaultProjects);
         }
       } catch (error) {
-        // Si Supabase n'est pas configuré, garder les projets par défaut
-        console.log("Supabase non configuré, utilisation des projets par défaut");
+        if (!isMounted) return;
+        setProjects(defaultProjects);
+      } finally {
+        if (isMounted) {
+          setIsLoading(false);
+          // Délai pour éviter le FOUC
+          setTimeout(() => setHasAnimated(true), 100);
+        }
       }
     };
 
     syncAndLoadProjects();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
+
+  // Marquer l'animation comme prête une fois que la section est visible
+  useEffect(() => {
+    if (inView && !isLoading) {
+      setHasAnimated(true);
+    }
+  }, [inView, isLoading]);
 
   return (
     <section
@@ -106,13 +121,34 @@ export function Projects() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
-            <motion.div
-              key={project.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView && isInitialized ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
+        {isLoading ? (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[1, 2, 3, 4].map((i) => (
+              <div
+                key={i}
+                className="relative bg-gradient-to-b from-[rgba(255,255,255,0.04)] to-[rgba(255,255,255,0.01)] backdrop-blur-[6px] rounded-[14px] overflow-hidden border border-[rgba(255,255,255,0.06)] h-96 animate-pulse"
+              >
+                <div className="h-56 bg-[#111827]/30" />
+                <div className="p-8 space-y-4">
+                  <div className="h-6 bg-[#111827]/50 rounded w-3/4" />
+                  <div className="h-4 bg-[#111827]/30 rounded w-full" />
+                  <div className="h-4 bg-[#111827]/30 rounded w-5/6" />
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {projects.map((project, index) => (
+              <motion.div
+                key={project.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={hasAnimated ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ 
+                  duration: 0.6, 
+                  delay: index * 0.1,
+                  ease: [0.22, 1, 0.36, 1]
+                }}
               className="relative bg-gradient-to-b from-[rgba(255,255,255,0.04)] to-[rgba(255,255,255,0.01)] backdrop-blur-[6px] rounded-[14px] overflow-hidden border border-[rgba(255,255,255,0.06)] hover:border-[#34d399]/20 transition-all duration-500 group hover:shadow-2xl hover:shadow-[#34d399]/5 hover:scale-[1.02]"
             >
               <div className="absolute inset-0 bg-[#34d399]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -239,9 +275,10 @@ export function Projects() {
                 </div>
               </div>
               </div>
-            </motion.div>
-          ))}
-        </div>
+              </motion.div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
