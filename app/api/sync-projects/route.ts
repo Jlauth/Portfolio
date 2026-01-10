@@ -24,6 +24,17 @@ export async function POST(request: Request) {
       return !title.includes("test") && title !== "projet test";
     });
     
+    // Supprimer les anciens projets Omniflamme qui ne correspondent pas exactement
+    const { error: deleteOldOmniflammeError } = await supabase
+      .from("projects")
+      .delete()
+      .like("title", "Omniflamme%")
+      .neq("title", "Omniflamme 9.0.1 - Mise à jour E-commerce");
+    
+    if (deleteOldOmniflammeError && deleteOldOmniflammeError.code !== "PGRST116") {
+      console.warn("Erreur lors de la suppression des anciens Omniflamme:", deleteOldOmniflammeError);
+    }
+    
     // Supprimer les doublons : garder seulement le premier projet pour chaque titre unique
     const titleToId = new Map<string, string>();
     const duplicateIds: string[] = [];
@@ -64,6 +75,35 @@ export async function POST(request: Request) {
     const existingTitles = new Set(
       Array.from(titleToId.keys())
     );
+
+    // AVANT la synchronisation, supprimer tous les projets qui ne sont plus dans defaultProjects
+    const validTitles = new Set(defaultProjects.map(p => p.title));
+    const { data: allProjects } = await supabase
+      .from("projects")
+      .select("id, title");
+    
+    if (allProjects) {
+      const projectsToDelete = allProjects
+        .filter(p => {
+          const title = p.title?.toLowerCase() || "";
+          const isKeepalive = p.title?.startsWith("__keepalive__");
+          const isTest = title.includes("test") || title === "projet test";
+          const isValid = validTitles.has(p.title);
+          return !isKeepalive && !isTest && !isValid;
+        })
+        .map(p => p.id);
+      
+      if (projectsToDelete.length > 0) {
+        const { error: deleteOrphansError } = await supabase
+          .from("projects")
+          .delete()
+          .in("id", projectsToDelete);
+        
+        if (deleteOrphansError && deleteOrphansError.code !== "PGRST116") {
+          console.warn("Erreur lors de la suppression des projets orphelins:", deleteOrphansError);
+        }
+      }
+    }
 
     // Synchroniser les projets
     const results = [];

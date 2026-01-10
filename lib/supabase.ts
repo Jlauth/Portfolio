@@ -64,6 +64,24 @@ export async function getProjects() {
   const seenTitles = new Set<string>();
   const uniqueProjects = filtered.filter((project) => {
     const title = project.title;
+    // Normaliser le titre pour détecter les doublons similaires
+    const normalizedTitle = title.toLowerCase().trim();
+    
+    // Détecter les doublons Omniflamme (avec ou sans version)
+    if (normalizedTitle.includes("omniflamme")) {
+      if (seenTitles.has("omniflamme")) {
+        return false; // Doublon, on l'exclut
+      }
+      // Garder seulement "Omniflamme 9.0.1 - Mise à jour E-commerce"
+      if (title === "Omniflamme 9.0.1 - Mise à jour E-commerce") {
+        seenTitles.add("omniflamme");
+        seenTitles.add(title); // Ajouter aussi le titre exact
+        return true;
+      }
+      // Exclure les autres variantes d'Omniflamme
+      return false;
+    }
+    
     if (seenTitles.has(title)) {
       return false; // Doublon, on l'exclut
     }
