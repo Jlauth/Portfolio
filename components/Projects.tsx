@@ -67,15 +67,14 @@ export function Projects() {
             return true;
           });
           
-          // Ne mettre à jour que si les projets sont différents pour éviter le clignotement
-          setProjects((prevProjects) => {
-            // Comparer les IDs pour éviter les mises à jour inutiles
-            const prevIds = prevProjects.map(p => p.id).sort().join(',');
-            const newIds = uniqueProjects.map(p => p.id).sort().join(',');
-            return prevIds === newIds ? prevProjects : uniqueProjects;
-          });
+          // TOUJOURS mettre à jour avec les projets de Supabase
+          console.log(`[Projects] Chargement de ${uniqueProjects.length} projets depuis Supabase:`, uniqueProjects.map(p => p.title));
+          setProjects(uniqueProjects);
+          setIsInitialized(true);
+        } else {
+          // Si Supabase est vide ou erreur, garder les projets par défaut
+          console.log("[Projects] Aucun projet dans Supabase, utilisation des projets par défaut");
         }
-        // Ne pas changer si Supabase est vide, garder les projets par défaut
       } catch (error) {
         // Si Supabase n'est pas configuré, garder les projets par défaut
         console.log("Supabase non configuré, utilisation des projets par défaut");
