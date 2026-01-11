@@ -79,16 +79,16 @@ export function Skills() {
   const [openCategory, setOpenCategory] = useState<string | null>(null);
   const [hasAnimated, setHasAnimated] = useState(false);
 
-  if (!mounted) {
-    return null;
-  }
-
   // Marquer l'animation comme terminée une fois que la section est visible
   useEffect(() => {
     if (inView && !hasAnimated) {
       setHasAnimated(true);
     }
   }, [inView, hasAnimated]);
+
+  if (!mounted) {
+    return null;
+  }
 
   const toggleCategory = (title: string) => {
     setOpenCategory(openCategory === title ? null : title);
