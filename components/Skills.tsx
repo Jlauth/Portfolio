@@ -78,6 +78,7 @@ export function Skills() {
   });
   const [openCategory, setOpenCategory] = useState<string | null>(null);
   const [hasAnimated, setHasAnimated] = useState(false);
+  const [animateBarsFor, setAnimateBarsFor] = useState<string | null>(null);
 
   // Marquer l'animation comme terminée une fois que la section est visible
   useEffect(() => {
@@ -91,7 +92,19 @@ export function Skills() {
   }
 
   const toggleCategory = (title: string) => {
-    setOpenCategory(openCategory === title ? null : title);
+    if (openCategory === title) {
+      setOpenCategory(null);
+      setAnimateBarsFor(null);
+      return;
+    }
+
+    setOpenCategory(title);
+    setAnimateBarsFor(null); // reset (important)
+
+    // Lance l'anim au frame suivant => évite le flash
+    requestAnimationFrame(() => {
+      setAnimateBarsFor(title);
+    });
   };
 
   return (
@@ -163,7 +176,6 @@ export function Skills() {
                   initial={false}
                   animate={{
                     maxHeight: isOpen ? 1000 : 0,
-                    opacity: isOpen ? 1 : 0,
                   }}
                   transition={{
                     duration: 0.35,
@@ -194,8 +206,8 @@ export function Skills() {
                             <div
                               className={`h-full bg-gradient-to-r ${skill.color} rounded-full shadow-lg shadow-[#34d399]/10 transition-[width] duration-700 ease-out`}
                               style={{ 
-                                width: isOpen ? `${skill.level}%` : "0%",
-                                transitionDelay: isOpen ? `${skillIndex * 50 + 150}ms` : "0ms"
+                                width: animateBarsFor === category.title ? `${skill.level}%` : "0%",
+                                transitionDelay: animateBarsFor === category.title ? `${skillIndex * 50 + 150}ms` : "0ms"
                               }}
                             />
                           </div>
