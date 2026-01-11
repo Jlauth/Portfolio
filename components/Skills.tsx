@@ -116,6 +116,7 @@ export function Skills() {
                 initial={{ opacity: 1 }}
                 animate={{ opacity: 1 }}
                 className="relative bg-gradient-to-b from-[rgba(255,255,255,0.04)] to-[rgba(255,255,255,0.01)] backdrop-blur-[6px] rounded-[14px] border border-[rgba(255,255,255,0.06)] overflow-hidden transition-all duration-500 hover:border-[#34d399]/20 hover:shadow-2xl hover:shadow-[#34d399]/5 group"
+                style={{ contain: "layout paint" }}
               >
                 {/* En-tête cliquable */}
                 <button
@@ -142,7 +143,7 @@ export function Skills() {
                 <motion.div
                   initial={false}
                   animate={{
-                    height: isOpen ? "auto" : 0,
+                    maxHeight: isOpen ? 1000 : 0,
                     opacity: isOpen ? 1 : 0,
                   }}
                   transition={{
@@ -156,8 +157,8 @@ export function Skills() {
                       {category.skills.map((skill, skillIndex) => (
                         <motion.div
                           key={skill.name}
-                          initial={{ opacity: 0, y: -10 }}
-                          animate={{ opacity: isOpen ? 1 : 0, y: isOpen ? 0 : -10 }}
+                          initial={false}
+                          animate={{ opacity: isOpen ? 1 : 0 }}
                           transition={{ 
                             duration: 0.4, 
                             delay: skillIndex * 0.05 
