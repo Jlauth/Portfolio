@@ -172,18 +172,14 @@ export function Skills() {
                           </div>
                           <div className="w-full bg-gray-800/50 rounded-full h-2.5 overflow-hidden relative">
                             <motion.div
-                              initial={false}
+                              initial={{ width: "0%" }}
                               animate={{ width: isOpen ? `${skill.level}%` : "0%" }}
                               transition={{ 
                                 duration: 0.8, 
                                 delay: isOpen ? skillIndex * 0.05 + 0.15 : 0,
                                 ease: [0.22, 1, 0.36, 1]
                               }}
-                              className={`h-full bg-gradient-to-r ${skill.color} rounded-full shadow-lg shadow-[#34d399]/10`}
-                              style={{ 
-                                width: "0%",
-                                willChange: "width"
-                              }}
+                              className={`h-full bg-gradient-to-r ${skill.color} rounded-full shadow-lg shadow-[#34d399]/10 will-change-[width]`}
                             />
                           </div>
                           </div>
