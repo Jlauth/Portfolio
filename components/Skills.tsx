@@ -175,24 +175,25 @@ export function Skills() {
                                   <span className="text-white text-sm font-medium">{skill.name}</span>
                                   <span className="text-gray-400 text-xs font-semibold">{skill.level}%</span>
                                 </div>
-                                <div className="w-full bg-gray-800/50 rounded-full h-2.5 overflow-hidden">
+                                <div className="w-full bg-gray-800/50 rounded-full h-2.5 overflow-hidden relative">
                                   <motion.div
-                                    initial={{ width: hasAnimatedSkill ? `${skill.level}%` : 0 }}
-                                    animate={{ width: `${skill.level}%` }}
+                                    initial={{ scaleX: hasAnimatedSkill ? 1 : 0, opacity: hasAnimatedSkill ? 1 : 0 }}
+                                    animate={{ scaleX: 1, opacity: 1 }}
                                     transition={{ 
                                       duration: hasAnimatedSkill ? 0 : 0.8, 
                                       delay: hasAnimatedSkill ? 0 : skillIndex * 0.05 + 0.2,
                                       ease: [0.22, 1, 0.36, 1]
                                     }}
-                                    onAnimationComplete={() => {
+                                    onAnimationStart={() => {
                                       if (!hasAnimatedSkill) {
                                         setAnimatedSkills(prev => new Set(prev).add(skillKey));
                                       }
                                     }}
-                                    className={`h-full bg-gradient-to-r ${skill.color} rounded-full shadow-lg shadow-[#34d399]/10 will-change-[width]`}
+                                    className={`h-full bg-gradient-to-r ${skill.color} rounded-full shadow-lg shadow-[#34d399]/10`}
                                     style={{ 
-                                      transform: 'translateZ(0)',
-                                      backfaceVisibility: 'hidden'
+                                      width: `${skill.level}%`,
+                                      transformOrigin: 'left',
+                                      willChange: 'transform, opacity'
                                     }}
                                   />
                                 </div>
