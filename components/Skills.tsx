@@ -124,7 +124,7 @@ export function Skills() {
             const isOpen = openCategory === category.title;
             
             return (
-              <div className="relative rounded-[14px]">
+              <div key={category.title} className="relative rounded-[14px]">
                 {/* Couche BLUR STATIQUE */}
                 <div
                   className="absolute inset-0 rounded-[14px] backdrop-blur-[6px] bg-gradient-to-b from-[rgba(255,255,255,0.04)] to-[rgba(255,255,255,0.01)] pointer-events-none"
@@ -132,7 +132,6 @@ export function Skills() {
                 
                 {/* Couche ANIMÉE */}
                 <motion.div
-                  key={category.title}
                   initial={{ opacity: 1 }}
                   animate={{ opacity: 1 }}
                   className="relative rounded-[14px] border border-[rgba(255,255,255,0.06)] overflow-hidden transition-all duration-500 hover:border-[#34d399]/20 hover:shadow-2xl hover:shadow-[#34d399]/5 group"
@@ -192,22 +191,11 @@ export function Skills() {
                             <span className="text-gray-400 text-xs font-semibold">{skill.level}%</span>
                           </div>
                           <div className="w-full bg-gray-800/50 rounded-full h-2.5 overflow-hidden relative">
-                            <motion.div
-                              initial={false}
-                              animate={{ 
-                                scaleX: isOpen ? 1 : 0, 
-                                opacity: isOpen ? 1 : 0 
-                              }}
-                              transition={{ 
-                                duration: 0.8, 
-                                delay: isOpen ? skillIndex * 0.05 + 0.15 : 0,
-                                ease: [0.22, 1, 0.36, 1]
-                              }}
-                              className={`h-full bg-gradient-to-r ${skill.color} rounded-full shadow-lg shadow-[#34d399]/10`}
+                            <div
+                              className={`h-full bg-gradient-to-r ${skill.color} rounded-full shadow-lg shadow-[#34d399]/10 transition-[width] duration-700 ease-out`}
                               style={{ 
-                                width: `${skill.level}%`,
-                                transformOrigin: 'left',
-                                willChange: 'transform, opacity'
+                                width: isOpen ? `${skill.level}%` : "0%",
+                                transitionDelay: isOpen ? `${skillIndex * 50 + 150}ms` : "0ms"
                               }}
                             />
                           </div>
