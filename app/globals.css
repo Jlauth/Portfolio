@@ -37,14 +37,36 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Classes utilitaires premium */
 .card-premium {
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.04),
-    rgba(255, 255, 255, 0.01)
-  );
+  position: relative;
+  overflow: hidden;
   border: 1px solid var(--border-subtle);
   border-radius: 14px;
-  backdrop-filter: blur(6px);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.card-premium::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
+  pointer-events: none;
+}
+
+.card-premium::after {
+  content: "";
+  position: absolute;
+  inset: -30px;
+  background: radial-gradient(circle at 20% 10%, rgba(52, 211, 153, 0.18), transparent 55%),
+              radial-gradient(circle at 80% 60%, rgba(236, 72, 153, 0.14), transparent 60%);
+  filter: blur(20px);
+  opacity: 0.45;
+  transform: translateZ(0);
+  pointer-events: none;
+}
+
+.card-premium > * {
+  position: relative;
+  z-index: 1;
 }
 
 .btn-primary {
