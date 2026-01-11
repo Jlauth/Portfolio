@@ -69,6 +69,7 @@ export function Skills() {
   });
   const [openCategory, setOpenCategory] = useState<string | null>(null);
   const [hasAnimated, setHasAnimated] = useState(false);
+  const [animatedSkills, setAnimatedSkills] = useState<Set<string>>(new Set());
 
   // Marquer l'animation comme terminée une fois que la section est visible
   useEffect(() => {
@@ -153,38 +154,52 @@ export function Skills() {
                     >
                       <div className="px-6 pb-6 pt-2">
                         <div className="grid md:grid-cols-2 gap-4">
-                          {category.skills.map((skill, skillIndex) => (
-                            <motion.div
-                              key={skill.name}
-                              initial={{ opacity: 0, y: -10 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              transition={{ 
-                                duration: 0.4, 
-                                delay: skillIndex * 0.05 
-                              }}
-                              className="relative bg-[#111827]/60 backdrop-blur-sm p-4 rounded-xl border border-[rgba(255,255,255,0.06)] hover:border-[#34d399]/20 hover:bg-[#111827]/80 transition-all duration-300 group/item"
-                            >
-                              <div className="absolute inset-0 bg-[#34d399]/5 rounded-xl opacity-0 group-hover/item:opacity-100 transition-opacity duration-300"></div>
-                              <div className="relative z-10">
-                              <div className="flex justify-between items-center mb-2">
-                                <span className="text-white text-sm font-medium">{skill.name}</span>
-                                <span className="text-gray-400 text-xs font-semibold">{skill.level}%</span>
-                              </div>
-                              <div className="w-full bg-gray-800/50 rounded-full h-2.5 overflow-hidden">
-                                <motion.div
-                                  initial={{ width: 0 }}
-                                  animate={{ width: `${skill.level}%` }}
-                                  transition={{ 
-                                    duration: 0.8, 
-                                    delay: skillIndex * 0.05 + 0.2,
-                                    ease: "easeOut"
-                                  }}
-                                  className={`h-full bg-gradient-to-r ${skill.color} rounded-full shadow-lg shadow-[#34d399]/10`}
-                                />
-                              </div>
-                              </div>
-                            </motion.div>
-                          ))}
+                          {category.skills.map((skill, skillIndex) => {
+                            const skillKey = `${category.title}-${skill.name}`;
+                            const hasAnimatedSkill = animatedSkills.has(skillKey);
+                            
+                            return (
+                              <motion.div
+                                key={skill.name}
+                                initial={{ opacity: 0, y: -10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ 
+                                  duration: 0.4, 
+                                  delay: skillIndex * 0.05 
+                                }}
+                                className="relative bg-[#111827]/60 backdrop-blur-sm p-4 rounded-xl border border-[rgba(255,255,255,0.06)] hover:border-[#34d399]/20 hover:bg-[#111827]/80 transition-all duration-300 group/item"
+                              >
+                                <div className="absolute inset-0 bg-[#34d399]/5 rounded-xl opacity-0 group-hover/item:opacity-100 transition-opacity duration-300"></div>
+                                <div className="relative z-10">
+                                <div className="flex justify-between items-center mb-2">
+                                  <span className="text-white text-sm font-medium">{skill.name}</span>
+                                  <span className="text-gray-400 text-xs font-semibold">{skill.level}%</span>
+                                </div>
+                                <div className="w-full bg-gray-800/50 rounded-full h-2.5 overflow-hidden">
+                                  <motion.div
+                                    initial={{ width: hasAnimatedSkill ? `${skill.level}%` : 0 }}
+                                    animate={{ width: `${skill.level}%` }}
+                                    transition={{ 
+                                      duration: hasAnimatedSkill ? 0 : 0.8, 
+                                      delay: hasAnimatedSkill ? 0 : skillIndex * 0.05 + 0.2,
+                                      ease: [0.22, 1, 0.36, 1]
+                                    }}
+                                    onAnimationComplete={() => {
+                                      if (!hasAnimatedSkill) {
+                                        setAnimatedSkills(prev => new Set(prev).add(skillKey));
+                                      }
+                                    }}
+                                    className={`h-full bg-gradient-to-r ${skill.color} rounded-full shadow-lg shadow-[#34d399]/10 will-change-[width]`}
+                                    style={{ 
+                                      transform: 'translateZ(0)',
+                                      backfaceVisibility: 'hidden'
+                                    }}
+                                  />
+                                </div>
+                                </div>
+                              </motion.div>
+                            );
+                          })}
                         </div>
                       </div>
                     </motion.div>
