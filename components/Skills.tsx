@@ -150,7 +150,7 @@ export function Skills() {
                 <motion.div
                   initial={{ opacity: 1 }}
                   animate={{ opacity: 1 }}
-                  className="relative rounded-[14px] border border-[rgba(255,255,255,0.06)] overflow-hidden transition-all duration-500 hover:border-[#34d399]/20 hover:shadow-2xl hover:shadow-[#34d399]/5 group"
+                  className="relative rounded-[14px] border border-[rgba(255,255,255,0.06)] overflow-hidden transition-[border-color,box-shadow] duration-500 hover:border-[#34d399]/20 hover:shadow-2xl hover:shadow-[#34d399]/5 group"
                   style={{ contain: "layout paint" }}
                 >
                 {/* En-tête cliquable */}
@@ -174,52 +174,54 @@ export function Skills() {
                   </motion.div>
                 </button>
 
-                {/* Contenu dépliable */}
-                <motion.div
-                  initial={false}
-                  animate={{
-                    maxHeight: isOpen ? 1000 : 0,
-                  }}
-                  transition={{
-                    duration: 0.35,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                  className="overflow-hidden"
+                {/* Contenu dépliable (CSS-only, zero flash) */}
+                <div
+                  className={[
+                    "grid transition-[grid-template-rows,opacity] duration-300",
+                    "ease-[cubic-bezier(0.22,1,0.36,1)]",
+                    isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0",
+                  ].join(" ")}
                 >
-                  <div className="px-6 pb-6 pt-2">
-                    <div className="grid md:grid-cols-2 gap-4">
-                      {category.skills.map((skill, skillIndex) => (
-                        <motion.div
-                          key={skill.name}
-                          initial={false}
-                          animate={{ opacity: isOpen ? 1 : 0 }}
-                          transition={{ 
-                            duration: 0.4, 
-                            delay: skillIndex * 0.05 
-                          }}
-                          className="relative bg-gradient-to-b from-[#111827]/80 to-[#111827]/60 p-4 rounded-xl border border-[rgba(255,255,255,0.06)] hover:border-[#34d399]/20 hover:bg-gradient-to-b hover:from-[#111827]/90 hover:to-[#111827]/70 transition-all duration-300 group/item"
-                        >
-                          <div className="absolute inset-0 bg-[#34d399]/5 rounded-xl opacity-0 group-hover/item:opacity-100 transition-opacity duration-300"></div>
-                          <div className="relative z-10">
-                          <div className="flex justify-between items-center mb-2">
-                            <span className="text-white text-sm font-medium">{skill.name}</span>
-                            <span className="text-gray-400 text-xs font-semibold">{skill.level}%</span>
+                  <div className="overflow-hidden">
+                    <div className="px-6 pb-6 pt-2">
+                      <div className="grid md:grid-cols-2 gap-4">
+                        {category.skills.map((skill, skillIndex) => (
+                          <div
+                            key={skill.name}
+                            className={[
+                              "relative bg-gradient-to-b from-[#111827]/80 to-[#111827]/60",
+                              "p-4 rounded-xl border border-[rgba(255,255,255,0.06)]",
+                              "transition-[opacity,transform,border-color,background] duration-300",
+                              "hover:border-[#34d399]/20 hover:bg-gradient-to-b hover:from-[#111827]/90 hover:to-[#111827]/70",
+                              "group/item",
+                              isOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-1",
+                            ].join(" ")}
+                            style={{
+                              transitionDelay: isOpen ? `${skillIndex * 50}ms` : "0ms",
+                            }}
+                          >
+                            <div className="absolute inset-0 bg-[#34d399]/5 rounded-xl opacity-0 group-hover/item:opacity-100 transition-opacity duration-300" />
+                            <div className="relative z-10">
+                            <div className="flex justify-between items-center mb-2">
+                              <span className="text-white text-sm font-medium">{skill.name}</span>
+                              <span className="text-gray-400 text-xs font-semibold">{skill.level}%</span>
+                            </div>
+                            <div className="w-full bg-gray-800/50 rounded-full h-2.5 overflow-hidden relative">
+                              <div
+                                className={`h-full bg-gradient-to-r ${skill.color} rounded-full shadow-lg shadow-[#34d399]/10 transition-[width] duration-700 ease-out`}
+                                style={{
+                                  width: animateBarsFor === category.title ? `${skill.level}%` : "0%",
+                                  transitionDelay: animateBarsFor === category.title ? `${skillIndex * 50 + 150}ms` : "0ms",
+                                }}
+                              />
+                            </div>
+                            </div>
                           </div>
-                          <div className="w-full bg-gray-800/50 rounded-full h-2.5 overflow-hidden relative">
-                            <div
-                              className={`h-full bg-gradient-to-r ${skill.color} rounded-full shadow-lg shadow-[#34d399]/10 transition-[width] duration-700 ease-out`}
-                              style={{ 
-                                width: animateBarsFor === category.title ? `${skill.level}%` : "0%",
-                                transitionDelay: animateBarsFor === category.title ? `${skillIndex * 50 + 150}ms` : "0ms"
-                              }}
-                            />
-                          </div>
-                          </div>
-                        </motion.div>
-                      ))}
+                        ))}
+                      </div>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               </motion.div>
             </div>
             );
