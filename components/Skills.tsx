@@ -111,13 +111,20 @@ export function Skills() {
             const isOpen = openCategory === category.title;
             
             return (
-              <motion.div
-                key={category.title}
-                initial={{ opacity: 1 }}
-                animate={{ opacity: 1 }}
-                className="relative bg-gradient-to-b from-[rgba(255,255,255,0.04)] to-[rgba(255,255,255,0.01)] backdrop-blur-[6px] rounded-[14px] border border-[rgba(255,255,255,0.06)] overflow-hidden transition-all duration-500 hover:border-[#34d399]/20 hover:shadow-2xl hover:shadow-[#34d399]/5 group"
-                style={{ contain: "layout paint" }}
-              >
+              <div className="relative rounded-[14px]">
+                {/* Couche BLUR STATIQUE */}
+                <div
+                  className="absolute inset-0 rounded-[14px] backdrop-blur-[6px] bg-gradient-to-b from-[rgba(255,255,255,0.04)] to-[rgba(255,255,255,0.01)] pointer-events-none"
+                />
+                
+                {/* Couche ANIMÉE */}
+                <motion.div
+                  key={category.title}
+                  initial={{ opacity: 1 }}
+                  animate={{ opacity: 1 }}
+                  className="relative rounded-[14px] border border-[rgba(255,255,255,0.06)] overflow-hidden transition-all duration-500 hover:border-[#34d399]/20 hover:shadow-2xl hover:shadow-[#34d399]/5 group"
+                  style={{ contain: "layout paint" }}
+                >
                 {/* En-tête cliquable */}
                 <button
                   onClick={() => toggleCategory(category.title)}
@@ -173,7 +180,7 @@ export function Skills() {
                           </div>
                           <div className="w-full bg-gray-800/50 rounded-full h-2.5 overflow-hidden relative">
                             <motion.div
-                              initial={{ scaleX: 0, opacity: 0 }}
+                              initial={false}
                               animate={{ 
                                 scaleX: isOpen ? 1 : 0, 
                                 opacity: isOpen ? 1 : 0 
@@ -198,6 +205,7 @@ export function Skills() {
                   </div>
                 </motion.div>
               </motion.div>
+              </div>
             );
           })}
         </div>
