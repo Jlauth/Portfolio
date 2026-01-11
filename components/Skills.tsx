@@ -138,18 +138,11 @@ export function Skills() {
             
             return (
               <div key={category.title} className="relative rounded-[14px]">
-                {/* Couche BLUR STATIQUE (faux blur sans backdrop-filter) */}
+                {/* Couche BLUR STATIQUE (gradient simple sans blur pour éviter les recalculs) */}
                 <div
-                  className="absolute inset-0 rounded-[14px] bg-gradient-to-b from-[rgba(255,255,255,0.05)] to-[rgba(255,255,255,0.01)] pointer-events-none"
+                  className="absolute inset-0 rounded-[14px] pointer-events-none"
                   style={{
-                    background: `
-                      linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01)),
-                      radial-gradient(circle at 20% 10%, rgba(52,211,153,0.12), transparent 55%),
-                      radial-gradient(circle at 80% 60%, rgba(236,72,153,0.1), transparent 60%)
-                    `,
-                    filter: 'blur(8px)',
-                    transform: 'translateZ(0)',
-                    opacity: 0.6
+                    background: `linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01))`,
                   }}
                 />
                 
@@ -228,7 +221,7 @@ export function Skills() {
                   </div>
                 </motion.div>
               </motion.div>
-              </div>
+            </div>
             );
           })}
         </div>
