@@ -170,7 +170,7 @@ export function Skills() {
                             duration: 0.4, 
                             delay: skillIndex * 0.05 
                           }}
-                          className="relative bg-[#111827]/60 backdrop-blur-sm p-4 rounded-xl border border-[rgba(255,255,255,0.06)] hover:border-[#34d399]/20 hover:bg-[#111827]/80 transition-all duration-300 group/item"
+                          className="relative bg-gradient-to-b from-[#111827]/80 to-[#111827]/60 p-4 rounded-xl border border-[rgba(255,255,255,0.06)] hover:border-[#34d399]/20 hover:bg-gradient-to-b hover:from-[#111827]/90 hover:to-[#111827]/70 transition-all duration-300 group/item"
                         >
                           <div className="absolute inset-0 bg-[#34d399]/5 rounded-xl opacity-0 group-hover/item:opacity-100 transition-opacity duration-300"></div>
                           <div className="relative z-10">
