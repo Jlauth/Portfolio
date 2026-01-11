@@ -61,7 +61,16 @@ const skillCategories: SkillCategory[] = [
   },
 ];
 
+function useMounted() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+  return mounted;
+}
+
 export function Skills() {
+  const mounted = useMounted();
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.2,
@@ -69,6 +78,10 @@ export function Skills() {
   });
   const [openCategory, setOpenCategory] = useState<string | null>(null);
   const [hasAnimated, setHasAnimated] = useState(false);
+
+  if (!mounted) {
+    return null;
+  }
 
   // Marquer l'animation comme terminée une fois que la section est visible
   useEffect(() => {
